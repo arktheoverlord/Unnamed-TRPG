@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Godot;
 
-namespace Assets.Scripts.Combat.Helper {
+namespace Scripts.Combat.Helper {
     public class AreaFinder {
         public static List<Vector2> GetArea(Vector2 center, int length) {
             List<Vector2> area = new List<Vector2>();

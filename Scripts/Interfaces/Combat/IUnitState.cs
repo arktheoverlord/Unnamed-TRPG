@@ -1,11 +1,11 @@
-﻿using Assets.Scripts.Actors;
-using Assets.Scripts.Actors.Jobs;
-using Assets.Scripts.Combat;
-using Assets.Scripts.Combat.Mapping;
-using Assets.Scripts.Combat.States;
+﻿using Scripts.Actors;
+using Scripts.Actors.Jobs;
+using Scripts.Combat;
+using Scripts.Combat.Mapping;
+using Scripts.Combat.States;
 using System.Collections.Generic;
 
-namespace Assets.Scripts.Interfaces.Combat {
+namespace Scripts.Interfaces.Combat {
     public interface IUnitState {
         int GetID();
 

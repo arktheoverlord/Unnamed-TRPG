@@ -1,11 +1,11 @@
-﻿using Assets.Scripts.Actors.Jobs;
-using Assets.Scripts.Combat.Mapping;
-using Assets.Scripts.Combat.States;
-using Assets.Scripts.Items.Equipment;
+﻿using Scripts.Actors.Jobs;
+using Scripts.Combat.Mapping;
+using Scripts.Combat.States;
+using Scripts.Items.Equipment;
 using System.Collections.Generic;
 using Godot;
 
-namespace Assets.Scripts.Interfaces.Combat {
+namespace Scripts.Interfaces.Combat {
     public interface ICombatState {
         void Update(float deltaTime);
 

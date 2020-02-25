@@ -1,13 +1,13 @@
-﻿using Assets.Scripts.Actors.Jobs;
-using Assets.Scripts.Items;
-using Assets.Scripts.Items.Equipment;
+using Scripts.Actors.Jobs;
+using Scripts.Items;
+using Scripts.Items.Equipment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Actors {
+namespace Scripts.Actors {
     public class Character {
         public struct JobMetadata {
             public bool Unlocked;

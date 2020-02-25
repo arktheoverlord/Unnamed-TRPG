@@ -1,9 +1,9 @@
-﻿using Assets.Scripts.Actors.Jobs;
-using Assets.Scripts.Combat;
-using Assets.Scripts.Combat.Mapping;
+﻿using Scripts.Actors.Jobs;
+using Scripts.Combat;
+using Scripts.Combat.Mapping;
 using System.Collections.Generic;
 
-namespace Assets.Scripts.Interfaces.Combat {
+namespace Scripts.Interfaces.Combat {
     interface ICombatStateMachine : IStateMachine {
         void EndCombat();
 

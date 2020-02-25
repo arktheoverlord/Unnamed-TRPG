@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Godot;
 
-namespace Assets.Scripts.Combat.States {
+namespace Scripts.Combat.States {
     public class UnitStateChanges {
         public bool DidDodgeOrMiss { get; set; }
 

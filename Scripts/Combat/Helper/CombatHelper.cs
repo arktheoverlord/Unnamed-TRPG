@@ -1,12 +1,12 @@
-﻿using Assets.Scripts.Actors.Jobs;
-using Assets.Scripts.Combat.States;
-using Assets.Scripts.Interfaces.Combat;
-using Assets.Scripts.Items.Equipment;
+﻿using Scripts.Actors.Jobs;
+using Scripts.Combat.States;
+using Scripts.Interfaces.Combat;
+using Scripts.Items.Equipment;
 using System;
 using System.ComponentModel;
 using Godot;
 
-namespace Assets.Scripts.Combat.Helper {
+namespace Scripts.Combat.Helper {
     public class CombatHelper {
 
         /* Abilities and equipment that affect ability hit chance

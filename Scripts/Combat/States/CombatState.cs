@@ -1,14 +1,14 @@
-﻿using Assets.Scripts.Actors;
-using Assets.Scripts.Actors.Jobs;
-using Assets.Scripts.Combat.Helper;
-using Assets.Scripts.Combat.Mapping;
-using Assets.Scripts.Interfaces.Combat;
-using Assets.Scripts.Items.Equipment;
+﻿using Scripts.Actors;
+using Scripts.Actors.Jobs;
+using Scripts.Combat.Helper;
+using Scripts.Combat.Mapping;
+using Scripts.Interfaces.Combat;
+using Scripts.Items.Equipment;
 using System;
 using System.Collections.Generic;
 using Godot;
 
-namespace Assets.Scripts.Combat.States {
+namespace Scripts.Combat.States {
     public class CombatState : ICombatState {
         public Map Map { get; private set; }
         public List<IUnitState> Units { get; private set; }

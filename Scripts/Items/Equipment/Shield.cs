@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Items.Equipment {
+namespace Scripts.Items.Equipment {
     public class Shield : BaseItem {
         public float Constitution { get; private set; }
         public float Wisdom { get; private set; }

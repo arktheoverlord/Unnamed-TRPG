@@ -1,10 +1,10 @@
-﻿using Assets.Scripts.Combat;
-using Assets.Scripts.Combat.States;
-using Assets.Scripts.Helpers;
+﻿using Scripts.Combat;
+using Scripts.Combat.States;
+using Scripts.Helpers;
 using System.Collections.Generic;
-using static Assets.Scripts.Helpers.ExtraEffectHelper;
+using static Scripts.Helpers.ExtraEffectHelper;
 
-namespace Assets.Scripts.Actors.Jobs {
+namespace Scripts.Actors.Jobs {
     public class JobAbility {
         public string Name { get; set; }
         public string Description { get; set; }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Items.Equipment {
+namespace Scripts.Items.Equipment {
     public class BodyArmor : BaseItem {
         public float HP { get; set; }
         public float MP { get; set; }

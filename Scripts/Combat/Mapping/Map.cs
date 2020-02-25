@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Combat.Mapping {
+namespace Scripts.Combat.Mapping {
     public class Map {
         public List<List<Tile>> Tiles { get; private set; }
 
@@ -20,6 +20,19 @@ namespace Assets.Scripts.Combat.Mapping {
                 }
                 Tiles.Add(temp);
             }
+        }
+
+        public Tile GetTile(int x, int y){
+            return Tiles[y][x];
+        }
+
+        public List<Tile> GetAdjacentTiles(Tile tile){
+            var tiles = new List<Tile>();
+            tiles.Add(GetTile((int) tile.Position.x + 1, (int) tile.Position.y));
+            tiles.Add(GetTile((int) tile.Position.x - 1, (int) tile.Position.y));
+            tiles.Add(GetTile((int) tile.Position.x, (int) tile.Position.y + 1));
+            tiles.Add(GetTile((int) tile.Position.x, (int) tile.Position.y - 1));
+            return tiles;
         }
     }
 }

@@ -1,12 +1,12 @@
-﻿using Assets.Scripts.Actors.Jobs;
-using Assets.Scripts.Combat.Helper;
-using Assets.Scripts.Interfaces.Combat;
+﻿using Scripts.Actors.Jobs;
+using Scripts.Combat.Helper;
+using Scripts.Interfaces.Combat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
-namespace Assets.Scripts.Combat.States {
+namespace Scripts.Combat.States {
     public class AbilityEffects {
         public static void AbilityTargetedEffects(IUnitState user, IUnitState target, JobAbility ability, UnitStateChanges targetChanges, UnitStateChanges userChanges, RandomNumberGenerator rng) {
             if ((ability.Heals || ability.HealsMP) && !userChanges.DidDodgeOrMiss) {

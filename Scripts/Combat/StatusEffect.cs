@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.Combat.States;
+﻿using Scripts.Combat.States;
 
-namespace Assets.Scripts.Combat {
+namespace Scripts.Combat {
     public class StatusEffect {
         public string Name { get; set; }
         public string Description { get; set; }

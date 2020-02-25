@@ -1,5 +1,4 @@
-﻿
-namespace Assets.Scripts.Actors.Jobs {
+﻿namespace Scripts.Actors.Jobs {
     public class Job {
         public struct UnlockRequirment {
             public Job Job { get; set; }

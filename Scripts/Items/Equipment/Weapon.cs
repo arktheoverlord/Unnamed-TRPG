@@ -1,11 +1,11 @@
-﻿using Assets.Scripts.Actors.Jobs;
+﻿using Scripts.Actors.Jobs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Items.Equipment {
+namespace Scripts.Items.Equipment {
     public class Weapon : BaseItem {
         public float MeleePower { get; set; }
         public float RangedPower { get; set; }

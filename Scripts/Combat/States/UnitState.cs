@@ -1,11 +1,11 @@
-﻿using Assets.Scripts.Actors;
-using Assets.Scripts.Actors.Jobs;
-using Assets.Scripts.Combat.Mapping;
-using Assets.Scripts.Interfaces.Combat;
+﻿using Scripts.Actors;
+using Scripts.Actors.Jobs;
+using Scripts.Combat.Mapping;
+using Scripts.Interfaces.Combat;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Assets.Scripts.Combat.States {
+namespace Scripts.Combat.States {
     public class UnitState : IUnitState {
         protected int ID;
         protected Character Base;

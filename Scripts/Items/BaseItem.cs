@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Items {
+﻿namespace Scripts.Items {
     public class BaseItem{
         public string Name { get; set; }
         public int ID { get; set; }

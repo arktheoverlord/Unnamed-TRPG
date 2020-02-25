@@ -1,10 +1,10 @@
-﻿using Assets.Scripts.Actors.Jobs;
-using Assets.Scripts.Combat.States;
-using Assets.Scripts.Items;
+﻿using Scripts.Actors.Jobs;
+using Scripts.Combat.States;
+using Scripts.Items;
 using System.Collections.Generic;
 using Godot;
 
-namespace Assets.Scripts.Interfaces.Combat {
+namespace Scripts.Interfaces.Combat {
     public interface ICombatAI {
         void AddAggression(IUnitState unit, int aggroAmount);
 
