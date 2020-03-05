@@ -13,9 +13,9 @@ namespace Scripts.Interfaces.Combat {
 
         float GetStat(Stat stat);
 
-        Tile GetPosition();
+        MapTile GetPosition();
 
-        void SetPosition(Tile position);
+        void SetPosition(MapTile position);
 
         float GetSpeedTotal();
 

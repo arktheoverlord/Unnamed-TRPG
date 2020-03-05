@@ -40,8 +40,8 @@ namespace Scripts.Actors {
         public float HPRegen { get; set; }
         public float MPRegen { get; set; }
 
-        public BaseItem MainHand { get; set; }
-        public BaseItem OffHand { get; set; }
+        public Item MainHand { get; set; }
+        public Item OffHand { get; set; }
         public HeadArmor Helmet { get; set; }
         public BodyArmor BodyArmor { get; set; }
         public LegArmor LegArmor { get; set; }

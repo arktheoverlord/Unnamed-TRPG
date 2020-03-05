@@ -85,7 +85,7 @@ namespace Scripts.Combat {
             }
         }
 
-        public ICombatState UnitMove(IUnitState unit, Tile position) {
+        public ICombatState UnitMove(IUnitState unit, MapTile position) {
             combatState.UnitMove(unit, position);
             return combatState;
         }

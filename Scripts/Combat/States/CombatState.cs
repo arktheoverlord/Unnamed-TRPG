@@ -94,7 +94,7 @@ namespace Scripts.Combat.States {
             return moveArea;
         }
 
-        public void UnitMove(IUnitState unit, Tile position) {
+        public void UnitMove(IUnitState unit, MapTile position) {
             unit.SetPosition(position);
         }
 

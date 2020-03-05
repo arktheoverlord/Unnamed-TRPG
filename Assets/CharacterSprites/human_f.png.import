@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/dirt0.png-601973104fe4ca3cde3d311421b37508.s3tc.stex"
-path.etc2="res://.import/dirt0.png-601973104fe4ca3cde3d311421b37508.etc2.stex"
+path.s3tc="res://.import/human_f.png-8768050d690614f089b2c6676e43af63.s3tc.stex"
+path.etc2="res://.import/human_f.png-8768050d690614f089b2c6676e43af63.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Tiles/Floors/dirt0.png"
-dest_files=[ "res://.import/dirt0.png-601973104fe4ca3cde3d311421b37508.s3tc.stex", "res://.import/dirt0.png-601973104fe4ca3cde3d311421b37508.etc2.stex" ]
+source_file="res://Assets/CharacterSprites/human_f.png"
+dest_files=[ "res://.import/human_f.png-8768050d690614f089b2c6676e43af63.s3tc.stex", "res://.import/human_f.png-8768050d690614f089b2c6676e43af63.etc2.stex" ]
 
 [params]
 

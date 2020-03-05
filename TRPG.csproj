@@ -58,7 +58,7 @@
     <Compile Include="Scripts\Combat\Helper\AreaFinder.cs" />
     <Compile Include="Scripts\Combat\Helper\CombatHelper.cs" />
     <Compile Include="Scripts\Combat\Mapping\Map.cs" />
-    <Compile Include="Scripts\Combat\Mapping\Tile.cs" />
+    <Compile Include="Scripts\Combat\Mapping\MapTile.cs" />
     <Compile Include="Scripts\Combat\States\AbilityEffects.cs" />
     <Compile Include="Scripts\Combat\States\AIUnitState.cs" />
     <Compile Include="Scripts\Combat\States\CombatState.cs" />
@@ -71,7 +71,7 @@
     <Compile Include="Scripts\Interfaces\Combat\ICombatStateMachine.cs" />
     <Compile Include="Scripts\Interfaces\Combat\IUnitState.cs" />
     <Compile Include="Scripts\Interfaces\IStateMachine.cs" />
-    <Compile Include="Scripts\Items\BaseItem.cs" />
+    <Compile Include="Scripts\Items\Item.cs" />
     <Compile Include="Scripts\Items\Consumable.cs" />
     <Compile Include="Scripts\Items\Equipment\Accessory.cs" />
     <Compile Include="Scripts\Items\Equipment\AccessoryAffix.cs" />
@@ -81,8 +81,10 @@
     <Compile Include="Scripts\Items\Equipment\Shield.cs" />
     <Compile Include="Scripts\Items\Equipment\Weapon.cs" />
     <Compile Include="Scripts\Main.cs" />
+    <Compile Include="Scripts\UI\Combat\CameraControl.cs" />
     <Compile Include="Scripts\UI\Combat\Cursor.cs" />
     <Compile Include="Scripts\Constants.cs" />
+    <Compile Include="Scripts\XML\Parser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

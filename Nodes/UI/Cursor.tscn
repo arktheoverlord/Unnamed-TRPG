@@ -1,23 +1,23 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/UI/Combat/Cursor.cs" type="Script" id=1]
-[ext_resource path="res://Assets/UI/Combat/highlighter.png" type="Texture" id=2]
+[ext_resource path="res://Assets/UI/Combat/GroundCursor.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15.9429, 15.9279 )
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 0.001, 1 )
 
-[node name="Highlighter" type="Area2D"]
+[node name="KinematicBody" type="KinematicBody"]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="CollisionShape"]
+transform = Transform( 1.55, 0, 0, 0, -6.77527e-008, -1, 0, 1.55, -4.37114e-008, 0, 0.01, 0 )
 texture = ExtResource( 2 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="CameraPivot" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="CameraPivot"]
+transform = Transform( 1, 0, 0, 0, 0.799685, 0.60042, 0, -0.60042, 0.799685, 0, 5.6, 8 )
 current = true
-zoom = Vector2( 0.6, 0.6 )

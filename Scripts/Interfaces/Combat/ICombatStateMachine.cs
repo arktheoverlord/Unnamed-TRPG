@@ -7,7 +7,7 @@ namespace Scripts.Interfaces.Combat {
     interface ICombatStateMachine : IStateMachine {
         void EndCombat();
 
-        ICombatState UnitMove(IUnitState unit, Tile position);
+        ICombatState UnitMove(IUnitState unit, MapTile position);
 
         ICombatState UnitUseAbility(IUnitState unit, Job job, JobAbility ability, List<int> targetIndexes);
 

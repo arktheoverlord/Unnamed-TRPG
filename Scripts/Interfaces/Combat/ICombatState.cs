@@ -9,7 +9,7 @@ namespace Scripts.Interfaces.Combat {
     public interface ICombatState {
         void Update(float deltaTime);
 
-        void UnitMove(IUnitState unit, Tile position);
+        void UnitMove(IUnitState unit, MapTile position);
 
         Dictionary<IUnitState, UnitStateChanges> UnitUseAbility(IUnitState unit, JobAbility ability, List<IUnitState> targets, RandomNumberGenerator rng);
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Scripts.Items.Equipment {
-    public class Shield : BaseItem {
+    public class Shield : Item {
         public float Constitution { get; private set; }
         public float Wisdom { get; private set; }
         public float BlockChance { get; private set; }

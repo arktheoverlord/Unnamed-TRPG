@@ -10,10 +10,10 @@ namespace Scripts.Combat.AI {
         private List<TileScore> openList;
         private List<TileScore> closedList;
         private TileScore current;
-        private Tile target;
+        private MapTile target;
         private Map map;
 
-        public void Init(Tile start, Tile target, Map map) {
+        public void Init(MapTile start, MapTile target, Map map) {
             openList = new List<TileScore>();
             closedList = new List<TileScore>();
             current = new TileScore(start);
@@ -21,7 +21,7 @@ namespace Scripts.Combat.AI {
             this.map = map;
         }
 
-        public List<Tile> FindPath() {
+        public List<MapTile> FindPath() {
             if(current.Tile.Position != target.Position){
                 var walkables = GetAdjacentWalkableTiles();
 
@@ -42,7 +42,7 @@ namespace Scripts.Combat.AI {
                 closedList.Add(lowest);
                 current = lowest;
             } else if(current.Tile.Position == target.Position){
-                var tiles = new List<Tile>();
+                var tiles = new List<MapTile>();
 
                 foreach(var tile in closedList){
                     tiles.Add(tile.Tile);
@@ -54,7 +54,7 @@ namespace Scripts.Combat.AI {
             return null;
         }
 
-        private float GetTileHScore(Tile tile){
+        private float GetTileHScore(MapTile tile){
             float x = tile.Position.x - target.Position.x;
             float y = (float) Math.Pow(tile.Position.y - target.Position.y, 2);
             return (float) Math.Sqrt(x + y);
@@ -66,10 +66,10 @@ namespace Scripts.Combat.AI {
 
         private List<TileScore> GetAdjacentWalkableTiles(){
             var walkables = new List<TileScore>();
-            List<Tile> tiles = map.GetAdjacentTiles(current.Tile);
+            List<MapTile> tiles = map.GetAdjacentTiles(current.Tile);
             
-            foreach(Tile tile in tiles){
-                if(tile.Walkable){
+            foreach(MapTile tile in tiles){
+                if(tile.Passable){
                     walkables.Add(new TileScore(tile));
                 }
             }
@@ -78,7 +78,7 @@ namespace Scripts.Combat.AI {
         }
 
         private class TileScore {
-            public Tile Tile { get; set; }
+            public MapTile Tile { get; set; }
             public TileScore Parent { get; set; }
 
             public float HScore { get; set; }
@@ -89,7 +89,7 @@ namespace Scripts.Combat.AI {
                 }
             }
 
-            public TileScore(Tile tile){
+            public TileScore(MapTile tile){
                 HScore = 0;
                 GScore = 0;
                 Tile = tile;

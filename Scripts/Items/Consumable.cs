@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Scripts.Items {
-    public class Consumable : BaseItem {
+    public class Consumable : Item {
         public bool RestoresHealth { get; set; }
         public float AmountRestored { get; set; }
         public bool RemovesStatusEffect { get; set; }

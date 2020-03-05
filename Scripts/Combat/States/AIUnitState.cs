@@ -92,7 +92,7 @@ namespace Scripts.Combat.States {
             throw new NotImplementedException();
         }
 
-        public BaseItem GetItemUsed() {
+        public Item GetItemUsed() {
             throw new NotImplementedException();
         }
 
@@ -100,10 +100,10 @@ namespace Scripts.Combat.States {
             throw new NotImplementedException();
         }
 
-        public List<Tile> GetPath(Tile target, Map map) {
-            List<Tile> open = new List<Tile>();
-            List<Tile> close = new List<Tile>();
-            Tile current = position;
+        public List<MapTile> GetPath(MapTile target, Map map) {
+            List<MapTile> open = new List<MapTile>();
+            List<MapTile> close = new List<MapTile>();
+            MapTile current = position;
             throw new NotImplementedException();
         }
     }

@@ -2,22 +2,63 @@ using Godot;
 using System;
 using Scripts;
 
-public class Cursor : Area2D {
+public class Cursor : KinematicBody {
+    [Export]
+    private float mouseSens = 0.01f;
+
+    [Export]
+    private float zoomSens = 0.5f;
+
     private bool justPressed = false;
     private bool held = false;
     private string buttonPressed = "";
     private float timeSincePressed = 0f;
     private float timeSinceLastMove = 0f;
 
+    private Spatial cameraPivot;
+    private Camera camera;
+
     public override void _Ready() {
+        cameraPivot = GetNode<Spatial>("CameraPivot");
+        camera = GetNode<Camera>("CameraPivot/Camera");
     }
 
     public override void _Process(float delta) {
-        if (Input.IsActionPressed("R")) {
-            Console.WriteLine(justPressed);
-            Console.WriteLine(held);
-            Console.WriteLine(buttonPressed);
-            Console.WriteLine(timeSincePressed);
+        ProcessKeyboardInput(delta);
+    }
+
+    public override void _Input(InputEvent @event) {
+        ProcessMouseInput(@event);
+    }
+
+    private void ProcessMouseInput(InputEvent @event) {
+        if (@event is InputEventMouseMotion eventMouseMotion && Input.IsActionPressed("MouseLeft")) {
+            Input.SetMouseMode(Input.MouseMode.Captured);
+            cameraPivot.RotateY(-eventMouseMotion.Relative.x * mouseSens);
+        }
+
+        if (Input.IsActionJustReleased("MouseLeft")) {
+            Input.SetMouseMode(Input.MouseMode.Visible);
+        }
+
+        if (Input.IsActionPressed("MouseWheelUp")) {
+            Vector3 target = camera.Translation + new Vector3(0, -zoomSens, -zoomSens);
+            if (target.y > 3 && target.z > 3) {
+                camera.TranslateObjectLocal(new Vector3(0, 0, -zoomSens));
+            }
+        }
+
+        if (Input.IsActionPressed("MouseWheelDown")) {
+            Vector3 target = camera.Translation + new Vector3(0, zoomSens, zoomSens);
+            if (target.y <= 13 && target.z <= 13) {
+                camera.TranslateObjectLocal(new Vector3(0, 0, zoomSens));
+            }
+        }
+    }
+
+    private void ProcessKeyboardInput(float delta) {
+        if (Input.IsActionJustPressed("R")) {
+            cameraPivot.Rotation = new Vector3(cameraPivot.Rotation.x, 0, cameraPivot.Rotation.z);
         }
 
         if (!justPressed && !held) {
@@ -72,20 +113,42 @@ public class Cursor : Area2D {
         }
     }
 
+    private void ProcessMouseInput(float delta) {
+
+    }
+
     private void Move(string direction) {
         switch (direction) {
             case "ui_right":
-                Position = new Vector2(Position.x + 32, Position.y);
+                Translate(GetDirectionFromPivotRotation(new Vector3(2, 0, 0)));
                 break;
             case "ui_left":
-                Position = new Vector2(Position.x - 32, Position.y);
+                Translate(GetDirectionFromPivotRotation(new Vector3(-2, 0, 0)));
                 break;
             case "ui_up":
-                Position = new Vector2(Position.x, Position.y - 32);
+                Translate(GetDirectionFromPivotRotation(new Vector3(0, 0, -2)));
                 break;
             case "ui_down":
-                Position = new Vector2(Position.x, Position.y + 32);
+                Translate(GetDirectionFromPivotRotation(new Vector3(0, 0, 2)));
                 break;
         }
     }
+
+    private Vector3 GetDirectionFromPivotRotation(Vector3 direction) {
+        float y = Mathf.Rad2Deg(cameraPivot.GetRotation().y);
+
+        if (y >= -45 && y <= 45) {
+            return direction;
+        }
+        else if (y >= 46 && y <= 135) {
+            return new Vector3(direction.z, 0, -direction.x);
+        }
+        else if (y >= 136 || y <= -136) {
+            return new Vector3(-direction.x, 0, -direction.z);
+        }
+        else {
+            return new Vector3(-direction.z, 0, direction.x);
+        }
+    }
+
 }

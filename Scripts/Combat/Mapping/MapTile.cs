@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Godot;
 
 namespace Scripts.Combat.Mapping {
-    public class Tile {
+    public class MapTile {
         public Vector2 Position { get; set; }
         public int Height { get; set; }
         public int TerrainType { get; set; }
         public int TerrainObjectID { get; set; }
-        public bool Walkable { get; set;}
+        public bool Passable { get; set;}
 
         public bool IsSlope { get; set; }
         public int SlopeDirection { get; set; }
@@ -21,6 +21,6 @@ namespace Scripts.Combat.Mapping {
         public int TrapID { get; set; }
 
         public bool HasTreasure { get; set; }
-        public List<BaseItem> TreasureChest { get; set; }
+        public List<Item> TreasureChest { get; set; }
     }
 }

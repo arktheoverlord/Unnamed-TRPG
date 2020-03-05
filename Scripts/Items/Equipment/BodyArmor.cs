@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Scripts.Items.Equipment {
-    public class BodyArmor : BaseItem {
+    public class BodyArmor : Item {
         public float HP { get; set; }
         public float MP { get; set; }
         public float Constitution { get; set; }

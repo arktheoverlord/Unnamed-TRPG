@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Scripts.Items.Equipment {
-    public class Weapon : BaseItem {
+    public class Weapon : Item {
         public float MeleePower { get; set; }
         public float RangedPower { get; set; }
         public float MagicalPower { get; set; }

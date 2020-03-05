@@ -12,7 +12,7 @@ namespace Scripts.Combat.States {
 
         protected Dictionary<Stat, float> stats;
         protected Dictionary<StatusEffect, int> statuses;
-        protected Tile position;
+        protected MapTile position;
         protected float speedTotal;
         protected int facing;
         protected bool isPC;
@@ -58,11 +58,11 @@ namespace Scripts.Combat.States {
             return stats[stat];
         }
 
-        public Tile GetPosition() {
+        public MapTile GetPosition() {
             return position;
         }
 
-        public void SetPosition(Tile position) {
+        public void SetPosition(MapTile position) {
             this.position = position;
         }
 

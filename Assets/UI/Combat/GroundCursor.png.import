@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/dirt0.png-601973104fe4ca3cde3d311421b37508.s3tc.stex"
-path.etc2="res://.import/dirt0.png-601973104fe4ca3cde3d311421b37508.etc2.stex"
+path.s3tc="res://.import/GroundCursor.png-1f3cf3076d12e64a329b5cd842988b73.s3tc.stex"
+path.etc2="res://.import/GroundCursor.png-1f3cf3076d12e64a329b5cd842988b73.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Tiles/Floors/dirt0.png"
-dest_files=[ "res://.import/dirt0.png-601973104fe4ca3cde3d311421b37508.s3tc.stex", "res://.import/dirt0.png-601973104fe4ca3cde3d311421b37508.etc2.stex" ]
+source_file="res://Assets/UI/Combat/GroundCursor.png"
+dest_files=[ "res://.import/GroundCursor.png-1f3cf3076d12e64a329b5cd842988b73.s3tc.stex", "res://.import/GroundCursor.png-1f3cf3076d12e64a329b5cd842988b73.etc2.stex" ]
 
 [params]
 

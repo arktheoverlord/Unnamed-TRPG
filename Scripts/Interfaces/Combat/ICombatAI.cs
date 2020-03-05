@@ -26,7 +26,7 @@ namespace Scripts.Interfaces.Combat {
 
         List<IUnitState> GetAbilityTargets();
 
-        BaseItem GetItemUsed();
+        Item GetItemUsed();
 
         List<IUnitState> GetItemTargets();
     }
