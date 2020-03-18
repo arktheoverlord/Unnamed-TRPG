@@ -50,41 +50,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scripts\Actors\Character.cs" />
-    <Compile Include="Scripts\Actors\Jobs\Job.cs" />
-    <Compile Include="Scripts\Actors\Jobs\JobAbility.cs" />
-    <Compile Include="Scripts\Combat\AI\PathFinder.cs" />
-    <Compile Include="Scripts\Combat\CombatStateMachine.cs" />
-    <Compile Include="Scripts\Combat\Helper\AreaFinder.cs" />
-    <Compile Include="Scripts\Combat\Helper\CombatHelper.cs" />
-    <Compile Include="Scripts\Combat\Mapping\Map.cs" />
-    <Compile Include="Scripts\Combat\Mapping\MapTile.cs" />
-    <Compile Include="Scripts\Combat\States\AbilityEffects.cs" />
-    <Compile Include="Scripts\Combat\States\AIUnitState.cs" />
-    <Compile Include="Scripts\Combat\States\CombatState.cs" />
-    <Compile Include="Scripts\Combat\States\UnitState.cs" />
-    <Compile Include="Scripts\Combat\States\UnitStateChanges.cs" />
+    <Compile Include="Scripts\Characters\Character.cs" />
+    <Compile Include="Scripts\Characters\Jobs\Job.cs" />
+    <Compile Include="Scripts\Characters\Jobs\JobAbility.cs" />
+    <Compile Include="Scripts\Combat\Nodes\CharacterBody.cs" />
+    <Compile Include="Scripts\Combat\Nodes\CombatCharacterManager.cs" />
+    <Compile Include="Scripts\Combat\Nodes\CombatStateMachine.cs" />
+    <Compile Include="Scripts\Combat\StateChanges.cs" />
+    <Compile Include="Scripts\Combat\States\CharacterState.cs" />
+    <Compile Include="Scripts\Combat\States\AIState.cs" />
     <Compile Include="Scripts\Combat\StatusEffect.cs" />
-    <Compile Include="Scripts\Helpers\ExtraEffectHelper.cs" />
-    <Compile Include="Scripts\Interfaces\Combat\ICombatAI.cs" />
-    <Compile Include="Scripts\Interfaces\Combat\ICombatState.cs" />
-    <Compile Include="Scripts\Interfaces\Combat\ICombatStateMachine.cs" />
-    <Compile Include="Scripts\Interfaces\Combat\IUnitState.cs" />
+    <Compile Include="Scripts\Combat\Mapping\Tile.cs" />
     <Compile Include="Scripts\Interfaces\IStateMachine.cs" />
     <Compile Include="Scripts\Items\Item.cs" />
     <Compile Include="Scripts\Items\Consumable.cs" />
-    <Compile Include="Scripts\Items\Equipment\Accessory.cs" />
-    <Compile Include="Scripts\Items\Equipment\AccessoryAffix.cs" />
-    <Compile Include="Scripts\Items\Equipment\BodyArmor.cs" />
-    <Compile Include="Scripts\Items\Equipment\HeadArmor.cs" />
-    <Compile Include="Scripts\Items\Equipment\LegArmor.cs" />
-    <Compile Include="Scripts\Items\Equipment\Shield.cs" />
-    <Compile Include="Scripts\Items\Equipment\Weapon.cs" />
-    <Compile Include="Scripts\Main.cs" />
-    <Compile Include="Scripts\UI\Combat\CameraControl.cs" />
-    <Compile Include="Scripts\UI\Combat\Cursor.cs" />
-    <Compile Include="Scripts\Constants.cs" />
-    <Compile Include="Scripts\XML\Parser.cs" />
+    <Compile Include="Scripts\Items\Accessories\Accessory.cs" />
+    <Compile Include="Scripts\Items\Accessories\AccessoryAffix.cs" />
+    <Compile Include="Scripts\Items\Equipment.cs" />
+    <Compile Include="Scripts\UI\Combat\CombatCursor.cs" />
+    <Compile Include="Scripts\UI\Combat\HUD.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

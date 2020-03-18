@@ -8,7 +8,7 @@ namespace Scripts.Interfaces {
     public interface IStateMachine {
         void StartMachine();
 
-        void UpdateStateMachine();
+        void UpdateMachine();
 
         bool HasEnded();
     }
