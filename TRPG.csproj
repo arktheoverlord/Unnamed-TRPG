@@ -55,6 +55,7 @@
     <Compile Include="Scripts\Characters\Jobs\JobAbility.cs" />
     <Compile Include="Scripts\Combat\Nodes\CharacterBody.cs" />
     <Compile Include="Scripts\Combat\Nodes\CombatCharacterManager.cs" />
+    <Compile Include="Scripts\Combat\Nodes\CombatManager.cs" />
     <Compile Include="Scripts\Combat\Nodes\CombatStateMachine.cs" />
     <Compile Include="Scripts\Combat\StateChanges.cs" />
     <Compile Include="Scripts\Combat\States\CharacterState.cs" />

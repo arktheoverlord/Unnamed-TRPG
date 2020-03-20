@@ -21,6 +21,7 @@ namespace Scripts.Combat.Mapping {
         public bool IsHalfBlock { get; set; } = false;
 
         private PhysicsDirectSpaceState spaceState;
+        private Sprite3D topSprite;
         private Sprite3D northSprite;
         private Sprite3D southSprite;
         private Sprite3D eastSprite;
@@ -28,6 +29,7 @@ namespace Scripts.Combat.Mapping {
 
         public override void _Ready() {
             spaceState = GetWorld().GetDirectSpaceState();
+            topSprite = GetNode<Sprite3D>("Sprites/Top");
             northSprite = GetNode<Sprite3D>("Sprites/North");
             southSprite = GetNode<Sprite3D>("Sprites/South");
             eastSprite = GetNode<Sprite3D>("Sprites/East");
@@ -54,7 +56,10 @@ namespace Scripts.Combat.Mapping {
             if (cast != null && cast.Count > 0 && cast["collider"].GetType() == typeof(Tile)) {
                 westSprite.Visible = false;
             }
-            
+            cast = spaceState.IntersectRay(center, center + new Vector3(0, 1, 0), self, collideWithAreas: true);
+            if (cast != null && cast.Count > 0 && cast["collider"].GetType() == typeof(Tile)) {
+                topSprite.Visible = false;
+            }
         }
 
         public int GetHighestTile(int tileCount = 0) {

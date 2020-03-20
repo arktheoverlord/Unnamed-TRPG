@@ -42,7 +42,7 @@ namespace Scripts.Combat.States {
             MaxHealth = BaseCharacter.Health;
             CurrentHealth = BaseCharacter.Health;
             MaxMana = BaseCharacter.Mana;
-            CurrentMana = BaseCharacter.Health;
+            CurrentMana = BaseCharacter.Mana;
             CharacterType = type;
         }
 

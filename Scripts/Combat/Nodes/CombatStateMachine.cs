@@ -5,8 +5,9 @@ using Scripts.Combat.States;
 using Scripts.Combat.Mapping;
 using Scripts.Characters;
 using Scripts.Characters.Jobs;
+using Scripts.Items;
 
-namespace Scripts.Combat {
+namespace Scripts.Combat.Nodes {
     public class CombatStateMachine : Node {
         public List<CharacterState> Units { get; private set; }
         private Dictionary<CharacterState, StateChanges> uncommitedChanges;
@@ -45,12 +46,16 @@ namespace Scripts.Combat {
         }
 
         public void AddPC(Character PC) {
-            CharacterState state = new CharacterState(PC, CharacterState.Type.PC);
+            AddPC(new CharacterState(PC, CharacterState.Type.PC));
+        }
+
+        public void AddPC(CharacterState PC){
             foreach (var s in Units) {
                 if (s.CharacterType == CharacterState.Type.NPC) {
-                    ((AIState)s).AddAggroTarget(state);
+                    ((AIState)s).AddAggroTarget(PC);
                 }
             }
+            
         }
 
         public void RemovePC(CharacterState PC) {
@@ -63,10 +68,13 @@ namespace Scripts.Combat {
         }
 
         public void AddNPC(Character NPC) {
-            CharacterState state = new AIState(NPC, CharacterState.Type.NPC);
+            AddNPC(new AIState(NPC, CharacterState.Type.NPC));
+        }
+
+        public void AddNPC(CharacterState NPC){
             foreach(var s in Units){
                 if(s.CharacterType == CharacterState.Type.Guest){
-                    ((AIState)s).AddAggroTarget(state);
+                    ((AIState)s).AddAggroTarget(NPC);
                 }
             }
         }
@@ -81,12 +89,16 @@ namespace Scripts.Combat {
         }
 
         public void AddGuest(Character Guest) {
-            CharacterState state = new CharacterState(Guest, CharacterState.Type.PC);
+            AddGuest(new CharacterState(Guest, CharacterState.Type.PC));
+        }
+
+        public void AddGuest(CharacterState Guest){
             foreach (var s in Units) {
                 if (s.CharacterType == CharacterState.Type.NPC) {
-                    ((AIState)s).AddAggroTarget(state);
+                    ((AIState)s).AddAggroTarget(Guest);
                 }
             }
+
         }
 
         public void RemoveGuest(CharacterState Guest) {

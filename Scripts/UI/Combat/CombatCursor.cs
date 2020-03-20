@@ -4,6 +4,7 @@ using Scripts;
 using Scripts.Combat;
 using Scripts.Combat.States;
 using Scripts.Combat.Mapping;
+using Scripts.Combat.Nodes;
 
 public class CombatCursor : Area {
     [Export]
@@ -18,12 +19,21 @@ public class CombatCursor : Area {
     [Signal]
     public delegate void NPCInteracted(CharacterBody body);
 
+    [Signal]
+    public delegate void CreateDebugNPC();
+
+    [Signal]
+    public delegate void OnCharacterHighlighted(CharacterBody body);
+
+    [Signal]
+    public delegate void OnCharacterDehighlighted();
+
     private bool justPressed = false;
     private bool held = false;
     private string buttonPressed = "";
     private float timeSincePressed = 0f;
     private float timeSinceLastMove = 0f;
-    private bool locked = false;
+    private bool cursorLocked = false;
 
     private Spatial cameraPivot;
     private Camera camera;
@@ -41,6 +51,7 @@ public class CombatCursor : Area {
     public const string ZoomOut = "ZoomOut";
     public const string Pan = "PanCamera";
     public const string Interact = "Interact";
+    public const string Debug = "Debug";
 
     public override void _Ready() {
         cameraPivot = GetNode<Spatial>(CameraPivot);
@@ -50,14 +61,18 @@ public class CombatCursor : Area {
     }
 
     public override void _Process(float delta) {
-        if (!locked) {
+        if (!cursorLocked) {
             ProcessCursorMovement(delta);
             ProcessInteraction();
+        }
+
+        if (Input.IsActionJustPressed(Debug)) {
+            EmitSignal(nameof(CreateDebugNPC));
         }
     }
 
     public override void _Input(InputEvent @event) {
-        if (!locked) {
+        if (!cursorLocked) {
             ProcessCameraMovement(@event);
         }
     }
@@ -142,35 +157,6 @@ public class CombatCursor : Area {
         }
     }
 
-    private void ProcessInteraction() {
-        if (Input.IsActionJustPressed(Interact)) {
-            if (overlapingEntity != null) {
-                if (overlapingEntity.GetType() == typeof(CharacterBody)) {
-                    if (GetOverlapingEntityTeamID() == CharacterState.Type.PC) {
-                        if (Input.GetMouseMode() == Input.MouseMode.Captured) {
-                            Input.SetMouseMode(Input.MouseMode.Visible);
-                        }
-                        locked = true;
-                        EmitSignal(nameof(PCInteracted), overlapingEntity);
-                    }
-                }
-            }
-            else {
-
-            }
-        }
-    }
-
-    private void OnBodyEntered(Node body) {
-        if (body.GetType() == typeof(CharacterBody)) {
-            overlapingEntity = (KinematicBody)body;
-        }
-    }
-
-    private void OnBodyExited(Node body) {
-        overlapingEntity = null;
-    }
-
     private void Move(string direction) {
         switch (direction) {
             case Right:
@@ -201,23 +187,6 @@ public class CombatCursor : Area {
                     Translation += offset + GetYOffset(target);
                 }
                 break;
-        }
-    }
-
-    private Vector3 GetDirectionFromPivotRotation(Vector3 direction) {
-        float y = Mathf.Rad2Deg(cameraPivot.GetRotation().y);
-
-        if (y >= -45 && y <= 45) {
-            return direction;
-        }
-        else if (y >= 46 && y <= 135) {
-            return new Vector3(direction.z, 0, -direction.x);
-        }
-        else if (y >= 136 || y <= -136) {
-            return new Vector3(-direction.x, 0, -direction.z);
-        }
-        else {
-            return new Vector3(-direction.z, 0, direction.x);
         }
     }
 
@@ -254,7 +223,64 @@ public class CombatCursor : Area {
         return new Vector3();
     }
 
-    private CharacterState.Type GetOverlapingEntityTeamID() {
-        return ((CharacterBody)overlapingEntity).State.CharacterType;
+    private void ProcessInteraction() {
+        if (Input.IsActionJustPressed(Interact)) {
+            if (overlapingEntity != null) {
+                if (overlapingEntity.GetType() == typeof(CharacterBody)) {
+                    if (GetOverlapingEntityTeam() == CharacterState.Type.PC) {
+                        if (Input.GetMouseMode() == Input.MouseMode.Captured) {
+                            Input.SetMouseMode(Input.MouseMode.Visible);
+                        }
+                        cursorLocked = true;
+                        EmitSignal(nameof(PCInteracted), overlapingEntity);
+                    }
+                }
+            }
+            else {
+
+            }
+        }
     }
+
+    private CharacterState.Type GetOverlapingEntityTeam() {
+        //return ((CharacterBody)overlapingEntity).State.CharacterTeam;
+        return CharacterState.Type.PC;
+    }
+
+    private void OnBodyEntered(Node body) {
+        if (body.GetType() == typeof(CharacterBody)) {
+            overlapingEntity = (KinematicBody)body;
+            if(body != null){
+                EmitSignal(nameof(OnCharacterHighlighted), (KinematicBody)body);
+            }
+        }
+    }
+
+    private void OnBodyExited(Node body) {
+        overlapingEntity = null;
+        EmitSignal(nameof(OnCharacterDehighlighted));
+    }
+
+    private Vector3 GetDirectionFromPivotRotation(Vector3 direction) {
+        float y = Mathf.Rad2Deg(cameraPivot.GetRotation().y);
+
+        if (y >= -45 && y <= 45) {
+            return direction;
+        }
+        else if (y >= 46 && y <= 135) {
+            return new Vector3(direction.z, 0, -direction.x);
+        }
+        else if (y >= 136 || y <= -136) {
+            return new Vector3(-direction.x, 0, -direction.z);
+        }
+        else {
+            return new Vector3(-direction.z, 0, direction.x);
+        }
+    }
+
+    #region GUI Interaction Stuff
+    private void OnExitButtonPressed(){
+        cursorLocked = false;
+    }
+    #endregion
 }

@@ -16,44 +16,44 @@ namespace Scripts.Characters {
             public List<JobAbility> UnlockedAbilities;
         }
 
-        public string Name { get; private set; }
-        public int CharacterLevel { get; private set; }
-        public Job CurrentJob { get; private set; }
-        public int CurrentJobLevel { get; private set; }
-        public Dictionary<Job, JobMetadata> JobMeta { get; private set; }
-        public List<Job> EquipedJobAbilities { get; private set; }
+        public string Name { get; set; } = "ArkTheOverlord";
+        public int CharacterLevel { get; set; } = 0;
+        public Job CurrentJob { get; set; } = new Job();
+        public int CurrentJobLevel { get; private set; } = 0;
+        public Dictionary<Job, JobMetadata> JobMeta { get; set; } = null;
+        public List<Job> EquipedJobAbilities { get; set; } = null;
 
         //Resources
-        public float Health { get; private set; }
-        public float Mana { get; private set; }
-        public float HealthRegen { get; private set; }
-        public float ManaRegen { get; private set; }
+        public float Health { get; set; } = 6969;
+        public float Mana { get; set; } = 420;
+        public float HealthRegen { get; set; } = 0;
+        public float ManaRegen { get; set; } = 0;
         //Attack Stats
-        public float Strength { get; private set; }
-        public float Dexterity { get; private set; }
-        public float Intellect { get; private set; }
-        public float PhysicalCritChance { get; private set; }
-        public float MagicalCritChance { get; private set; }
+        public float Strength { get; set; } = 0;
+        public float Dexterity { get; set; } = 0;
+        public float Intellect { get; set; } = 0;
+        public float PhysicalCritChance { get; set; } = 0;
+        public float MagicalCritChance { get; set; } = 0;
         //Defense Stats
-        public float Constitution { get; private set; }
-        public float Wisdom { get; private set; }
-        public float Evade { get; private set; }
-        public float Block { get; private set; }
-        public float FireResistence { get; private set; }
-        public float LightningResistence { get; private set; }
-        public float ColdResistence { get; private set; }
+        public float Constitution { get; set; } = 0;
+        public float Wisdom { get; set; } = 0;
+        public float Evade { get; set; } = 0;
+        public float Block { get; set; } = 0;
+        public float FireResistence { get; set; } = 0;
+        public float LightningResistence { get; set; } = 0;
+        public float ColdResistence { get; set; } = 0;
         //MovementStats
-        public float Move { get; private set; }
-        public float Speed { get; private set; }
-        public float Jump { get; private set; }
+        public float Move { get; set; } = 0;
+        public float Speed { get; set; } = 0;
+        public float Jump { get; set; } = 0;
 
-        public Equipment MainHand { get; private set; }
-        public Equipment OffHand { get; private set; }
-        public Equipment HeadArmor { get; private set; }
-        public Equipment BodyArmor { get; private set; }
-        public Equipment LegArmor { get; private set; }
-        public Accessory AccessoryOne { get; private set; }
-        public Accessory AccessoryTwo { get; private set; }
+        public Equipment MainHand { get; set; } = new Equipment();
+        public Equipment OffHand { get; set; } = new Equipment();
+        public Equipment HeadArmor { get; set; } = new Equipment();
+        public Equipment BodyArmor { get; set; } = new Equipment();
+        public Equipment LegArmor { get; set; } = new Equipment();
+        public Accessory AccessoryOne { get; set; } = new Accessory();
+        public Accessory AccessoryTwo { get; set; } = new Accessory();
 
         public int RemoveMainHand() {
             var temp = MainHand.ID;
@@ -276,6 +276,11 @@ namespace Scripts.Characters {
         public bool IsOffHandAShield() {
             EquipmentType equipType = OffHand.EquipmentType;
             return equipType == EquipmentType.Buckler || equipType == EquipmentType.KiteShield || equipType == EquipmentType.TowerShield;
+        }
+
+        public bool IsMainHandASpear(){
+            EquipmentType equipType = OffHand.EquipmentType;
+            return equipType == EquipmentType.ShortSpear || equipType == EquipmentType.LongSpear;
         }
 
         public bool IsMainHand2Handed() {

@@ -11,24 +11,24 @@
             public int Quest { get; set; }
         }
 
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int MaxLevel { get; set; }
-        public byte EXPProgression { get; set; }
+        public string Name { get; set; } = "Test Job Please Ignore";
+        public string Description { get; set; } = "";
+        public int MaxLevel { get; set; } = 0;
+        public byte EXPProgression { get; set; } = 0;
 
-        public int HPProgression { get; set; }
-        public int MPProgression { get; set; }
-        public int StrengthProgression { get; set; }
-        public int DexterityProgession { get; set; }
-        public int IntellectProgression { get; set; }
-        public int ConstitutionProgression { get; set; }
-        public int WisdomProgression { get; set; }
-        public int PhysicalCritChanceProgression { get; set; }
-        public int MagicalCritChanceProgression { get; set; }
-        public int SpeedProgression { get; set; }
-        public int MoveProgression { get; set; }
-        public int EvadeProgresion { get; set; }
-        public int BlockProgression { get; set; }
-        public int JumpProgression { get; set; }
+        public float HPProgression { get; set; } = 0;
+        public float MPProgression { get; set; } = 0;
+        public float StrengthProgression { get; set; } = 0;
+        public float DexterityProgession { get; set; } = 0;
+        public float IntellectProgression { get; set; } = 0;
+        public float ConstitutionProgression { get; set; } = 0;
+        public float WisdomProgression { get; set; } = 0;
+        public float PhysicalCritChanceProgression { get; set; } = 0;
+        public float MagicalCritChanceProgression { get; set; } = 0;
+        public float SpeedProgression { get; set; } = 0;
+        public float MoveProgression { get; set; } = 0;
+        public float EvadeProgresion { get; set; } = 0;
+        public float BlockProgression { get; set; } = 0;
+        public float JumpProgression { get; set; } = 0;
     }
 }

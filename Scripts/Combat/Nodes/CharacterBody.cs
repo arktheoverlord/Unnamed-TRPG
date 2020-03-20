@@ -1,7 +1,7 @@
 using Godot;
 using Scripts.Combat.States;
 
-namespace Scripts.Combat {
+namespace Scripts.Combat.Nodes {
     public class CharacterBody : KinematicBody {
         public CharacterState State {get; set;}
 

@@ -17,31 +17,29 @@ shape = SubResource( 1 )
 [node name="Sprites" type="Spatial" parent="."]
 
 [node name="Top" type="Sprite3D" parent="Sprites"]
-transform = Transform( 0.781, 0, 0, 0, -3.41386e-008, 1, 0, -0.781, -4.37114e-008, 0, 0, 0 )
-transparent = false
+transform = Transform( 0.782, 0, 0, 0, -3.41823e-008, 1, 0, -0.782, -4.37114e-008, 0, 0, 0 )
 double_sided = false
 texture = ExtResource( 2 )
 
 [node name="North" type="Sprite3D" parent="Sprites"]
-transform = Transform( -3.41823e-008, 0, 1, 0, 0.782, 0, -0.782, 0, -4.37114e-008, 1, -1, 0 )
+transform = Transform( -3.41386e-008, 0, 1, 0, 0.781, 0, -0.781, 0, -4.37114e-008, 1, -1, 0 )
 transparent = false
 double_sided = false
 texture = ExtResource( 3 )
 
 [node name="South" type="Sprite3D" parent="Sprites"]
-transform = Transform( 5.90394e-008, 0, -1, 0, 0.782, 0, 0.782, 0, 7.54979e-008, -1, -1, 0 )
+transform = Transform( 5.89639e-008, 0, -1, 0, 0.781, 0, 0.781, 0, 7.54979e-008, -1, -1, 0 )
 transparent = false
 double_sided = false
 texture = ExtResource( 3 )
 
 [node name="East" type="Sprite3D" parent="Sprites"]
-transform = Transform( 0.782, 0, 0, 0, 0.782, 0, 0, 0, 1, 0, -1, 1 )
-transparent = false
+transform = Transform( 0.781, 0, 0, 0, 0.781, 0, 0, 0, 1, 0, -1, 1 )
 double_sided = false
 texture = ExtResource( 3 )
 
 [node name="West" type="Sprite3D" parent="Sprites"]
-transform = Transform( -0.782, 0, -1.50996e-007, 0, 0.782, 0, 1.18079e-007, 0, -1, 0, -1, -1 )
+transform = Transform( -0.781, 0, -1.50996e-007, 0, 0.781, 0, 1.17928e-007, 0, -1, 0, -1, -1 )
 transparent = false
 double_sided = false
 texture = ExtResource( 3 )

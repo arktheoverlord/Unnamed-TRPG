@@ -20,14 +20,24 @@ namespace Scripts.Items {
         public float FireResistence { get; set; } = 0;
         public float LightningResistence { get; set; } = 0;
         public float ColdResistence { get; set; } = 0;
-        //MovementStats
+        //Movement Stats
         public float Move { get; set; } = 0;
         public float Speed { get; set; } = 0;
         public float Jump { get; set; } = 0;
+        //Weapon Stuff
+        public int Range { get; set; } = 1;
+        public AttackRangeType AttackRangeType { get; set; } = AttackRangeType.Line;
     }
 
     public enum EquipmentType {
-        GreatSword, LongSword, ShortSword, Dagger, Katana, GreatHammer, BattleHammer, 
-        GreatAxe, BattleAxe, ShortBow, LongBow, GreatBow, Buckler, KiteShield, TowerShield, HandWraps, Empty
+        Empty, GreatSword, LongSword, ShortSword, Dagger,
+        Katana, GreatHammer, BattleHammer, ShortSpear, LongSpear,
+        GreatAxe, BattleAxe, ShortBow, LongBow, GreatBow,
+        Buckler, KiteShield, TowerShield, HandWraps, LightHeadArmor,
+        LightBodyArmor, LightLegArmor, HeavyHeadArmor, HeavyBodyArmor, HeavyLegArmor
+    }
+
+    public enum AttackRangeType {
+        Line, Sphere, Square, Disconnected
     }
 }
