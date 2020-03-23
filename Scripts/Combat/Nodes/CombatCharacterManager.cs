@@ -8,26 +8,34 @@ namespace Scripts.Combat.Nodes {
         [Export]
         public PackedScene Character;
 
+        #region Signals
+        [Signal]
+        public delegate void OnCharacterAdded(Character character, CombatCharacterManager ccm, Team team);
+        #endregion
         public override void _Ready() {
 
         }
 
-        public void AddNewCharacter() {
-
+        public override void _Process(float delta){
+            if(Input.IsActionJustPressed("Debug")){
+                CreateDebugNPC();
+            }
         }
 
-        public void RemoveCharacter() {
+        public void AddCharacter(int characterID, Vector3 location) {
+            var character = Character.Instance();
+            ((CharacterBody) character).CharacterID = characterID;
+            ((CharacterBody) character).Translation = location;
+            AddChild(character);
+        }
+
+        public void RemoveCharacter(int characterID) {
 
         }
 
         public void CreateDebugNPC() {
-            var baseChar = new Character();
-            var state = new CharacterState(baseChar, CharacterState.Type.PC);
-            var character = Character.Instance();
-            ((CharacterBody)character).State = state;
-            ((KinematicBody)character).Scale = new Vector3(0.5f, 0.5f, 0.5f);
-            ((KinematicBody)character).Translation = new Vector3(1.5f, 0.51f, 1.5f);
-            AddChild(character);
+            var character = new Character();
+            EmitSignal(nameof(OnCharacterAdded), character, this, Team.PC);
         }
     }
 }

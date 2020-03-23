@@ -1,16 +1,15 @@
 using Godot;
-using System;
-using Scripts.Combat;
+using System.Collections.Generic;
+using Scripts.Combat.States;
 using Scripts.Combat.Nodes;
 
 public class HUD : Node {
-    #region Signals
-    [Signal]
-    public delegate void OnExit();
-    #endregion
     //Debug Stuff
     private Label test;
     private Label fpsCounter;
+
+    [Export]
+    public PackedScene BlueAreaHighlight;
 
     private Panel characterPanel;
     private Label characterName;
@@ -20,6 +19,19 @@ public class HUD : Node {
     private Label MP;
 
     private Panel actionPanel;
+
+    private CharacterState state;
+
+    #region Signals
+    [Signal]
+    public delegate void OnExit();
+
+    [Signal]
+    public delegate void MoveButtonPressed(int id, Vector3 center, HUD hud);
+
+    [Signal]
+    public delegate void OnCharacterHighlighted(int id, HUD hud);
+    #endregion
 
     public override void _Ready() {
         test = GetNode<Label>("Test");
@@ -41,12 +53,17 @@ public class HUD : Node {
         actionPanel.Visible = true;
     }
 
-    public void OnCharacterHighlighted(CharacterBody body) {
-        characterName.Text = body.State.BaseCharacter.Name;
-        characterLevel.Text = body.State.BaseCharacter.CharacterLevel.ToString();
-        characterClass.Text = body.State.BaseCharacter.CurrentJob.Name;
-        HP.Text = body.State.CurrentHealth + "/" + body.State.MaxHealth;
-        MP.Text = body.State.CurrentMana + "/" + body.State.MaxMana;
+    public void CharacterHighlighted(CharacterBody body){
+        EmitSignal(nameof(OnCharacterHighlighted), body.CharacterID, this);
+    }
+
+    public void ShowCharacterPanel(CharacterState state) {
+        this.state = state;
+        characterName.Text = state.BaseCharacter.CharacterName;
+        characterLevel.Text = state.BaseCharacter.CharacterLevel.ToString();
+        characterClass.Text = state.BaseCharacter.CurrentJob.Name;
+        HP.Text = state.CurrentHealth + "/" + state.MaxHealth;
+        MP.Text = state.CurrentMana + "/" + state.MaxMana;
         characterPanel.Visible = true;
     }
 
@@ -64,7 +81,15 @@ public class HUD : Node {
     }
 
     public void OnMoveButtonPressed(){
-        test.Text = "Move button pressed";
+        EmitSignal(nameof(MoveButtonPressed), state.ID, state.Position, this);
+    }
+
+    public void DisplayMovementArea(List<Vector3> area){
+        foreach(var vector in area){
+            var instance = BlueAreaHighlight.Instance();
+            ((Sprite3D) instance).Translation = vector;
+            GetNode<Spatial>("AreaHighlight").AddChild(instance);
+        }
     }
 
     public void OnInfoButtonPressed(){

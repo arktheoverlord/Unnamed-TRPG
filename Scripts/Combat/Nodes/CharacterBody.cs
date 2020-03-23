@@ -3,7 +3,8 @@ using Scripts.Combat.States;
 
 namespace Scripts.Combat.Nodes {
     public class CharacterBody : KinematicBody {
-        public CharacterState State {get; set;}
+        public int CharacterID { get; set; } = 0;
+        public Team Team { get; set; }
 
         public Sprite3D Sprite;
 

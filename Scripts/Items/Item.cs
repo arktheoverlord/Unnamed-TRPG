@@ -1,4 +1,5 @@
 ﻿namespace Scripts.Items {
+    ///<summary>The base class for all items.</summary>
     public class Item {
         public string Name { get; set; }
         public int ID { get; set; }

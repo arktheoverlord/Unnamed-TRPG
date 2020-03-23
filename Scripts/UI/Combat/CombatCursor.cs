@@ -13,6 +13,34 @@ public class CombatCursor : Area {
     [Export]
     private float zoomSens = 1f;
 
+    private bool justPressed = false;
+    private bool held = false;
+    private string buttonPressed = "";
+    private float timeSincePressed = 0f;
+    private float timeSinceLastMove = 0f;
+    private bool menuLocked = false;
+    private bool movementLocked = false;
+
+    private Spatial cameraPivot;
+    private Camera camera;
+    private CharacterBody overlapingEntity = null;
+    private PhysicsDirectSpaceState spaceState;
+    private static bool alreadyCreated = false;
+
+    public const string CameraPivot = "CameraPivot";
+    public const string CameraPath = "CameraPivot/Camera";
+    public const float MoveDistence = 1f;
+    public const string Up = "MovementUp";
+    public const string Down = "MovementDown";
+    public const string Left = "MovementLeft";
+    public const string Right = "MovementRight";
+    public const string ZoomIn = "ZoomIn";
+    public const string ZoomOut = "ZoomOut";
+    public const string Pan = "PanCamera";
+    public const string Interact = "Interact";
+    public const string Debug = "Debug";
+
+    #region
     [Signal]
     public delegate void PCInteracted(CharacterBody body);
 
@@ -28,30 +56,9 @@ public class CombatCursor : Area {
     [Signal]
     public delegate void OnCharacterDehighlighted();
 
-    private bool justPressed = false;
-    private bool held = false;
-    private string buttonPressed = "";
-    private float timeSincePressed = 0f;
-    private float timeSinceLastMove = 0f;
-    private bool cursorLocked = false;
-
-    private Spatial cameraPivot;
-    private Camera camera;
-    private KinematicBody overlapingEntity = null;
-    private PhysicsDirectSpaceState spaceState;
-
-    public const string CameraPivot = "CameraPivot";
-    public const string CameraPath = "CameraPivot/Camera";
-    public const float MoveDistence = 1f;
-    public const string Up = "MovementUp";
-    public const string Down = "MovementDown";
-    public const string Left = "MovementLeft";
-    public const string Right = "MovementRight";
-    public const string ZoomIn = "ZoomIn";
-    public const string ZoomOut = "ZoomOut";
-    public const string Pan = "PanCamera";
-    public const string Interact = "Interact";
-    public const string Debug = "Debug";
+    [Signal]
+    public delegate void MovementLocationSelected(Vector3 location);
+    #endregion
 
     public override void _Ready() {
         cameraPivot = GetNode<Spatial>(CameraPivot);
@@ -61,18 +68,18 @@ public class CombatCursor : Area {
     }
 
     public override void _Process(float delta) {
-        if (!cursorLocked) {
+        if (!menuLocked) {
             ProcessCursorMovement(delta);
             ProcessInteraction();
         }
 
-        if (Input.IsActionJustPressed(Debug)) {
-            EmitSignal(nameof(CreateDebugNPC));
+        if (Input.IsActionJustPressed("Exit")) {
+            GetTree().Quit();
         }
     }
 
     public override void _Input(InputEvent @event) {
-        if (!cursorLocked) {
+        if (!menuLocked) {
             ProcessCameraMovement(@event);
         }
     }
@@ -105,6 +112,7 @@ public class CombatCursor : Area {
     }
 
     private void ProcessCursorMovement(float delta) {
+        //Check if the player pressed a movement key on this frame.
         if (!justPressed && !held) {
             if (Input.IsActionPressed(Right)) {
                 Move(Right);
@@ -128,20 +136,25 @@ public class CombatCursor : Area {
             }
         }
 
+        //Check if the player is still holding the same movement input
         if (justPressed && Input.IsActionPressed(buttonPressed)) {
             timeSincePressed += delta;
+            //Check if the player has been holding the input for at least 1/3 of a second
             if (timeSincePressed >= 20f / 60f) {
                 held = true;
                 justPressed = false;
                 timeSincePressed = 0f;
             }
         }
+        //If the player isn't, reset everything
         else {
             justPressed = false;
             timeSincePressed = 0f;
         }
 
+        //Check if the player has been holding the input for at least 1/3 of a second
         if (held) {
+            //Check if the player is still holding the same movement input
             if (Input.IsActionPressed(buttonPressed)) {
                 timeSinceLastMove += delta;
                 if (timeSinceLastMove >= 5f / 60f) {
@@ -149,6 +162,7 @@ public class CombatCursor : Area {
                     timeSinceLastMove = 0f;
                 }
             }
+            //If the player isn't, reset everything
             else {
                 held = false;
                 buttonPressed = "";
@@ -191,8 +205,11 @@ public class CombatCursor : Area {
     }
 
     private bool IsTargetWithinMap(Vector3 target) {
+        //Raycast from the center of the cursor to the target
         var cast = spaceState.IntersectRay(Translation + new Vector3(0, 0.5F, 0), target, new Array() { this }, collideWithAreas: true);
+        //Did the raycast hit a collider?
         if (cast == null || cast.Count == 0) {
+            //The raycast didn't hit a collider, so raycast from the center of the targt to a point 100 units below the target
             cast = spaceState.IntersectRay(target, target - new Vector3(0, 100, 0), new Array() { this }, collideWithAreas: true);
             if (cast != null && cast.Count > 0) {
                 return true;
@@ -202,20 +219,26 @@ public class CombatCursor : Area {
             }
         }
         else {
+            //The raycast hit a collider, so the collider must be in the map
             return true;
         }
 
     }
 
     private Vector3 GetYOffset(Vector3 target) {
+        //Raycast from the center of the cursor to the target
         var cast = spaceState.IntersectRay(Translation + new Vector3(0, 0.5F, 0), target, new Array() { this }, collideWithAreas: true);
+        //Did raycast hit a collider and is it a tile?
         if (cast != null && cast.Count > 0 && cast["collider"].GetType() == typeof(Tile)) {
             var y = ((Tile)cast["collider"]).GetHighestTile();
             return new Vector3(0, y, 0);
         }
         else {
+            //Raycast from the center of the orginal target to a point 100 units below the original target
             cast = spaceState.IntersectRay(target + new Vector3(0, 0.5F, 0), target - new Vector3(0, 100, 0), new Array() { this }, collideWithAreas: true, collideWithBodies: false);
+            //Did the raycast hit a collider and is it a tile?
             if (cast != null && cast.Count > 0 && cast["collider"].GetType() == typeof(Tile)) {
+                //Find the different in height between the translation of the cursor and the translation of the tile
                 int y = (int)(Translation.y - ((Tile)cast["collider"]).Translation.y);
                 return new Vector3(0, -y, 0);
             }
@@ -225,16 +248,22 @@ public class CombatCursor : Area {
 
     private void ProcessInteraction() {
         if (Input.IsActionJustPressed(Interact)) {
-            if (overlapingEntity != null) {
+            if (overlapingEntity != null && !movementLocked) {
                 if (overlapingEntity.GetType() == typeof(CharacterBody)) {
-                    if (GetOverlapingEntityTeam() == CharacterState.Type.PC) {
+                    if (GetOverlapingEntityType() == Team.PC) {
                         if (Input.GetMouseMode() == Input.MouseMode.Captured) {
                             Input.SetMouseMode(Input.MouseMode.Visible);
                         }
-                        cursorLocked = true;
+                        menuLocked = true;
                         EmitSignal(nameof(PCInteracted), overlapingEntity);
                     }
+                    else {
+
+                    }
                 }
+            }
+            else if (movementLocked) {
+                EmitSignal(nameof(MovementLocationSelected), Translation);
             }
             else {
 
@@ -242,16 +271,11 @@ public class CombatCursor : Area {
         }
     }
 
-    private CharacterState.Type GetOverlapingEntityTeam() {
-        //return ((CharacterBody)overlapingEntity).State.CharacterTeam;
-        return CharacterState.Type.PC;
-    }
-
     private void OnBodyEntered(Node body) {
         if (body.GetType() == typeof(CharacterBody)) {
-            overlapingEntity = (KinematicBody)body;
-            if(body != null){
-                EmitSignal(nameof(OnCharacterHighlighted), (KinematicBody)body);
+            overlapingEntity = (CharacterBody)body;
+            if (body != null) {
+                EmitSignal(nameof(OnCharacterHighlighted), (CharacterBody)body);
             }
         }
     }
@@ -259,6 +283,10 @@ public class CombatCursor : Area {
     private void OnBodyExited(Node body) {
         overlapingEntity = null;
         EmitSignal(nameof(OnCharacterDehighlighted));
+    }
+
+    private Team GetOverlapingEntityType() {
+        return ((CharacterBody)overlapingEntity).Team;
     }
 
     private Vector3 GetDirectionFromPivotRotation(Vector3 direction) {
@@ -279,8 +307,13 @@ public class CombatCursor : Area {
     }
 
     #region GUI Interaction Stuff
-    private void OnExitButtonPressed(){
-        cursorLocked = false;
+    public void OnExitButtonPressed() {
+        menuLocked = false;
+    }
+
+    public void OnMoveButtonPressed() {
+        menuLocked = false;
+        movementLocked = true;
     }
     #endregion
 }

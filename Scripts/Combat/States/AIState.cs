@@ -5,7 +5,7 @@ namespace Scripts.Combat.States {
     public class AIState : CharacterState {
         public Dictionary<CharacterState, float> AggroList { get; private set; }
 
-        public AIState(Character baseCharacter, Type type) : base(baseCharacter, type) {
+        public AIState(Character baseCharacter, Team type, int id) : base(baseCharacter, type, id) {
             AggroList = new Dictionary<CharacterState, float>();
         }
 

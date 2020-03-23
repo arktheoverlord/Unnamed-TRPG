@@ -1,649 +1,645 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/Combat/BaseCharacter.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Combat/CombatManager.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Tiles/Grass.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Combat/CombatManager.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Tiles/Grass.tscn" type="PackedScene" id=2]
 
 [node name="World" type="Node"]
 
-[node name="Character" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5, 13.51, 0.5 )
-
-[node name="CombatManager" parent="." instance=ExtResource( 2 )]
+[node name="CombatManager" parent="." instance=ExtResource( 1 )]
 
 [node name="Terrain" type="Spatial" parent="."]
 editor/display_folded = true
 
-[node name="Grass" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass" parent="Terrain" instance=ExtResource( 2 )]
 
-[node name="Grass2" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass2" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.5, 0, 0.5 )
 
-[node name="Grass3" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass3" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 0, 0.5 )
 
-[node name="Grass10" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass10" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.5, 0, 1.5 )
 
-[node name="Grass11" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass11" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0, 1.5 )
 
-[node name="Grass12" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass12" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5, 0, 1.5 )
 
-[node name="Grass13" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass13" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, 0, 1.5 )
 
-[node name="Grass14" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass14" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, 0, 1.5 )
 
-[node name="Grass15" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass15" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 0, 1.5 )
 
-[node name="Grass16" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass16" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 0, 1.5 )
 
-[node name="Grass17" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass17" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 0, 2.5 )
 
-[node name="Grass18" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass18" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 0, 3.5 )
 
-[node name="Grass19" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass19" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 0, 4.5 )
 
-[node name="Grass29" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass29" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.5, 0, 2.5 )
 
-[node name="Grass31" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass31" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5, 0, 2.5 )
 
-[node name="Grass32" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass32" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, 0, 2.5 )
 
-[node name="Grass33" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass33" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, 0, 2.5 )
 
-[node name="Grass34" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass34" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 0, 2.5 )
 
-[node name="Grass35" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass35" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 0, 3.5 )
 
-[node name="Grass36" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass36" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, 0, 3.5 )
 
-[node name="Grass37" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass37" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, 0, 3.5 )
 
-[node name="Grass38" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass38" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5, 0, 3.5 )
 
-[node name="Grass39" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass39" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0, 3.5 )
 
-[node name="Grass40" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass40" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.5, 0, 3.5 )
 
-[node name="Grass41" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass41" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.5, 1, 4.5 )
 
-[node name="Grass42" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass42" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 1, 4.5 )
 
-[node name="Grass43" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass43" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5, 1, 4.5 )
 
-[node name="Grass44" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass44" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, 1, 4.5 )
 
-[node name="Grass45" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass45" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, 1, 4.5 )
 
-[node name="Grass46" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass46" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 1, 4.5 )
 
-[node name="Grass47" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass47" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 1, 4.5 )
 
-[node name="Grass48" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass48" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 1, 4.5 )
 
-[node name="Grass67" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass67" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 1, 5.5 )
 
-[node name="Grass68" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass68" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.5, 1, 5.5 )
 
-[node name="Grass69" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass69" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 1, 5.5 )
 
-[node name="Grass70" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass70" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5, 1, 5.5 )
 
-[node name="Grass71" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass71" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, 1, 5.5 )
 
-[node name="Grass72" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass72" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, 1, 5.5 )
 
-[node name="Grass73" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass73" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 1, 5.5 )
 
-[node name="Grass74" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass74" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 1, 5.5 )
 
-[node name="Grass75" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass75" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 1, 6.5 )
 
-[node name="Grass76" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass76" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 1, 7.5 )
 
-[node name="Grass77" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass77" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 1, 8.5 )
 
-[node name="Grass79" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass79" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, 1, 8.5 )
 
-[node name="Grass80" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass80" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, 1, 8.5 )
 
-[node name="Grass81" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass81" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5, 1, 8.5 )
 
-[node name="Grass82" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass82" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 1, 8.5 )
 
-[node name="Grass83" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass83" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.5, 1, 8.5 )
 
-[node name="Grass84" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass84" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 1, 8.5 )
 
-[node name="Grass85" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass85" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 1, 8.5 )
 
-[node name="Grass86" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass86" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 1, 8.5 )
 
-[node name="Grass87" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass87" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 1, 7.5 )
 
-[node name="Grass88" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass88" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 1, 6.5 )
 
-[node name="Grass89" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass89" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 1, 6.5 )
 
-[node name="Grass90" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass90" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 1, 6.5 )
 
-[node name="Grass91" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass91" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.5, 1, 6.5 )
 
-[node name="Grass92" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass92" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 1, 6.5 )
 
-[node name="Grass93" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass93" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5, 1, 6.5 )
 
-[node name="Grass94" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass94" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, 1, 6.5 )
 
-[node name="Grass95" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass95" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, 1, 6.5 )
 
-[node name="Grass96" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass96" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 1, 6.5 )
 
-[node name="Grass97" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass97" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 1, 7.5 )
 
-[node name="Grass98" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass98" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, 1, 7.5 )
 
-[node name="Grass99" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass99" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, 1, 7.5 )
 
-[node name="Grass101" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass101" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5, 1, 7.5 )
 
-[node name="Grass102" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass102" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 1, 7.5 )
 
-[node name="Grass103" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass103" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.5, 1, 7.5 )
 
-[node name="Grass104" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass104" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 1, 7.5 )
 
-[node name="Grass105" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass105" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 1, 7.5 )
 
-[node name="Grass78" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass78" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 1, 8.5 )
 
-[node name="Grass49" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass49" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 1, 3.5 )
 
-[node name="Grass50" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass50" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 1, 2.5 )
 
-[node name="Grass51" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass51" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 1, 1.5 )
 
-[node name="Grass52" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass52" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 1, 0.5 )
 gravity_point = true
 
-[node name="Grass125" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass125" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 2, 0.5 )
 gravity_point = true
 
-[node name="Grass126" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass126" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 3, 0.5 )
 gravity_point = true
 
-[node name="Grass127" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass127" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 4, 0.5 )
 gravity_point = true
 
-[node name="Grass128" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass128" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 5, 0.5 )
 gravity_point = true
 
-[node name="Grass129" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass129" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 6, 0.5 )
 gravity_point = true
 
-[node name="Grass130" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass130" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 7, 0.5 )
 gravity_point = true
 
-[node name="Grass131" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass131" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 7, 1.5 )
 gravity_point = true
 
-[node name="Grass132" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass132" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 6, 1.5 )
 gravity_point = true
 
-[node name="Grass133" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass133" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 5, 1.5 )
 gravity_point = true
 
-[node name="Grass134" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass134" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 4, 1.5 )
 gravity_point = true
 
-[node name="Grass136" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass136" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 3, 1.5 )
 gravity_point = true
 
-[node name="Grass137" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass137" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 2, 1.5 )
 gravity_point = true
 
-[node name="Grass138" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass138" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 2, 2.5 )
 gravity_point = true
 
-[node name="Grass139" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass139" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 2, 3.5 )
 gravity_point = true
 
-[node name="Grass140" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass140" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 2, 4.5 )
 gravity_point = true
 
-[node name="Grass145" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass145" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 2, 4.5 )
 gravity_point = true
 
-[node name="Grass175" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass175" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 3, 4.5 )
 gravity_point = true
 
-[node name="Grass176" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass176" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 4, 4.5 )
 gravity_point = true
 
-[node name="Grass206" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass206" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 5, 4.5 )
 gravity_point = true
 
-[node name="Grass141" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass141" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 3, 4.5 )
 gravity_point = true
 
-[node name="Grass142" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass142" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 4, 4.5 )
 gravity_point = true
 
-[node name="Grass143" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass143" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 5, 4.5 )
 gravity_point = true
 
-[node name="Grass144" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass144" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 6, 4.5 )
 gravity_point = true
 
-[node name="Grass146" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass146" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 7, 3.5 )
 gravity_point = true
 
-[node name="Grass147" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass147" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 7, 2.5 )
 gravity_point = true
 
-[node name="Grass148" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass148" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 6, 2.5 )
 gravity_point = true
 
-[node name="Grass149" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass149" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 5, 2.5 )
 gravity_point = true
 
-[node name="Grass150" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass150" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 4, 2.5 )
 gravity_point = true
 
-[node name="Grass151" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass151" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 3, 2.5 )
 gravity_point = true
 
-[node name="Grass152" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass152" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 3, 3.5 )
 gravity_point = true
 
-[node name="Grass153" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass153" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 4, 3.5 )
 gravity_point = true
 
-[node name="Grass154" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass154" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 5, 3.5 )
 gravity_point = true
 
-[node name="Grass155" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass155" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 6, 3.5 )
 gravity_point = true
 
-[node name="Grass156" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass156" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 7, 3.5 )
 gravity_point = true
 
-[node name="Grass157" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass157" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 7, 2.5 )
 gravity_point = true
 
-[node name="Grass158" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass158" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 7, 1.5 )
 gravity_point = true
 
-[node name="Grass159" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass159" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 7, 0.5 )
 gravity_point = true
 
-[node name="Grass160" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass160" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 7, 0.5 )
 gravity_point = true
 
-[node name="Grass172" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass172" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 7, 1.5 )
 gravity_point = true
 
-[node name="Grass173" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass173" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 7, 2.5 )
 gravity_point = true
 
-[node name="Grass174" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass174" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 7, 3.5 )
 gravity_point = true
 
-[node name="Grass177" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass177" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 6, 4.5 )
 gravity_point = true
 
-[node name="Grass178" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass178" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 5, 4.5 )
 gravity_point = true
 
-[node name="Grass179" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass179" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 4, 4.5 )
 gravity_point = true
 
-[node name="Grass180" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass180" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 3, 4.5 )
 gravity_point = true
 
-[node name="Grass181" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass181" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 2, 4.5 )
 gravity_point = true
 
-[node name="Grass182" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass182" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 1, 4.5 )
 gravity_point = true
 
-[node name="Grass183" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass183" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 0, 4.5 )
 gravity_point = true
 
-[node name="Grass184" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass184" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 0, 3.5 )
 gravity_point = true
 
-[node name="Grass185" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass185" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 0, 2.5 )
 gravity_point = true
 
-[node name="Grass186" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass186" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 0, 1.5 )
 gravity_point = true
 
-[node name="Grass187" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass187" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 1, 1.5 )
 gravity_point = true
 
-[node name="Grass188" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass188" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 2, 1.5 )
 gravity_point = true
 
-[node name="Grass189" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass189" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 3, 1.5 )
 gravity_point = true
 
-[node name="Grass190" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass190" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 4, 1.5 )
 gravity_point = true
 
-[node name="Grass191" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass191" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 5, 1.5 )
 gravity_point = true
 
-[node name="Grass192" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass192" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 6, 1.5 )
 gravity_point = true
 
-[node name="Grass193" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass193" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 6, 2.5 )
 gravity_point = true
 
-[node name="Grass194" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass194" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 6, 3.5 )
 gravity_point = true
 
-[node name="Grass195" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass195" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 5, 3.5 )
 gravity_point = true
 
-[node name="Grass196" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass196" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 4, 3.5 )
 gravity_point = true
 
-[node name="Grass198" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass198" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 3, 3.5 )
 gravity_point = true
 
-[node name="Grass199" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass199" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 2, 3.5 )
 gravity_point = true
 
-[node name="Grass200" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass200" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 1, 3.5 )
 gravity_point = true
 
-[node name="Grass201" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass201" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 1, 2.5 )
 gravity_point = true
 
-[node name="Grass202" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass202" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 2, 2.5 )
 gravity_point = true
 
-[node name="Grass203" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass203" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 3, 2.5 )
 gravity_point = true
 
-[node name="Grass204" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass204" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 4, 2.5 )
 gravity_point = true
 
-[node name="Grass205" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass205" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 5, 2.5 )
 gravity_point = true
 
-[node name="Grass197" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass197" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 6, 4.5 )
 gravity_point = true
 
-[node name="Grass161" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass161" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 6, 0.5 )
 gravity_point = true
 
-[node name="Grass162" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass162" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 5, 0.5 )
 gravity_point = true
 
-[node name="Grass163" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass163" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 4, 0.5 )
 gravity_point = true
 
-[node name="Grass165" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass165" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 3, 0.5 )
 gravity_point = true
 
-[node name="Grass166" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass166" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 2, 0.5 )
 gravity_point = true
 
-[node name="Grass167" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass167" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 2, 0.5 )
 gravity_point = true
 
-[node name="Grass168" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass168" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 3, 0.5 )
 gravity_point = true
 
-[node name="Grass169" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass169" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 4, 0.5 )
 gravity_point = true
 
-[node name="Grass170" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass170" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 5, 0.5 )
 gravity_point = true
 
-[node name="Grass171" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass171" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 6, 0.5 )
 gravity_point = true
 
-[node name="Grass164" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass164" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 4, 0.5 )
 gravity_point = true
 
-[node name="Grass135" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass135" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 4, 1.5 )
 gravity_point = true
 
-[node name="Grass53" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass53" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 1, 0.5 )
 
-[node name="Grass54" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass54" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 0, 0.5 )
 
-[node name="Grass55" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass55" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 0, 0.5 )
 
-[node name="Grass56" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass56" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 1, 0.5 )
 
-[node name="Grass109" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass109" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 0, 5.5 )
 
-[node name="Grass110" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass110" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 0, 6.5 )
 
-[node name="Grass111" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass111" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 0, 7.5 )
 
-[node name="Grass112" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass112" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 0, 8.5 )
 
-[node name="Grass113" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass113" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 0, 8.5 )
 
-[node name="Grass114" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass114" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.5, 0, 8.5 )
 
-[node name="Grass115" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass115" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.5, 0, 8.5 )
 
-[node name="Grass116" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass116" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0, 8.5 )
 
-[node name="Grass117" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass117" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5, 0, 8.5 )
 
-[node name="Grass118" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass118" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, 0, 8.5 )
 
-[node name="Grass119" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass119" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, 0, 8.5 )
 
-[node name="Grass120" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass120" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 0, 8.5 )
 
-[node name="Grass121" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass121" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 0, 8.5 )
 
-[node name="Grass122" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass122" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 0, 7.5 )
 
-[node name="Grass123" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass123" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 0, 6.5 )
 
-[node name="Grass124" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass124" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 0, 5.5 )
 
-[node name="Grass62" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass62" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 1, 5.5 )
 
-[node name="Grass63" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass63" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 1, 5.5 )
 
-[node name="Grass30" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass30" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0, 2.5 )
 
-[node name="Grass4" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass4" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.5, 0, 0.5 )
 
-[node name="Grass5" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass5" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 0, 0.5 )
 
-[node name="Grass6" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass6" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.5, 0, 0.5 )
 
-[node name="Grass7" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass7" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.5, 0, 0.5 )
 
-[node name="Grass8" parent="Terrain" instance=ExtResource( 3 )]
+[node name="Grass8" parent="Terrain" instance=ExtResource( 2 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.5, 0, 0.5 )

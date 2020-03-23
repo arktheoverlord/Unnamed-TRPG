@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Combat/Nodes/CombatManager.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Combat/CombatCharacterManager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/UI/Combat/HUD.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/UI/Combat/CombatCursor.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scripts/Combat/Nodes/CombatCharacterManager.cs" type="Script" id=5]
+[ext_resource path="res://Scenes/UI/Combat/BlueAreaHighlight.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/UI/Combat/CombatCursor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/Combat/Nodes/CombatStateMachine.cs" type="Script" id=6]
 
 [node name="CombatManager" type="Node"]
 script = ExtResource( 1 )
@@ -12,13 +13,17 @@ script = ExtResource( 1 )
 [node name="CombatCharacterManager" parent="." instance=ExtResource( 2 )]
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
+BlueAreaHighlight = ExtResource( 4 )
 
-[node name="CombatCursor" parent="." instance=ExtResource( 4 )]
+[node name="CombatCursor" parent="." instance=ExtResource( 5 )]
 
 [node name="CombatStateMachine" type="Node" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 6 )
+[connection signal="OnCharacterAdded" from="CombatCharacterManager" to="CombatStateMachine" method="OnCharacterAdded"]
+[connection signal="MoveButtonPressed" from="HUD" to="CombatStateMachine" method="GetMoveArea"]
+[connection signal="OnCharacterHighlighted" from="HUD" to="CombatStateMachine" method="OnCharacterHighlighted"]
 [connection signal="OnExit" from="HUD" to="CombatCursor" method="OnExitButtonPressed"]
 [connection signal="CreateDebugNPC" from="CombatCursor" to="CombatCharacterManager" method="CreateDebugNPC"]
 [connection signal="OnCharacterDehighlighted" from="CombatCursor" to="HUD" method="OnCharacterDehighlighted"]
-[connection signal="OnCharacterHighlighted" from="CombatCursor" to="HUD" method="OnCharacterHighlighted"]
+[connection signal="OnCharacterHighlighted" from="CombatCursor" to="HUD" method="CharacterHighlighted"]
 [connection signal="PCInteracted" from="CombatCursor" to="HUD" method="OnPCInteracted"]

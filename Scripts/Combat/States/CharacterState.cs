@@ -6,7 +6,9 @@ using System.Collections.Generic;
 namespace Scripts.Combat.States {
     public class CharacterState {
         public Character BaseCharacter { get; private set; }
-        public Type CharacterType { get; private set; }
+        public Team CharacterTeam { get; private set; }
+        public int ID { get; set; }
+        public Vector3 Position { get; set; }
 
         //Resources
         public float MaxHealth { get; set; } = 0;
@@ -36,18 +38,19 @@ namespace Scripts.Combat.States {
 
         public Dictionary<StatusEffect, int> StatusEffects;
 
-        public CharacterState(Character baseCharacter, Type type) {
+        public CharacterState(Character baseCharacter, Team type, int id) {
             StatusEffects = new Dictionary<StatusEffect, int>();
             BaseCharacter = baseCharacter;
+            CharacterTeam = type;
+            ID = id;
             MaxHealth = BaseCharacter.Health;
             CurrentHealth = BaseCharacter.Health;
             MaxMana = BaseCharacter.Mana;
             CurrentMana = BaseCharacter.Mana;
-            CharacterType = type;
         }
+    }
 
-        public enum Type {
-            PC, NPC, Guest
-        }
+    public enum Team {
+        PC, NPC, Guest
     }
 }

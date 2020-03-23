@@ -6,9 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Godot;
 
 namespace Scripts.Characters {
-    public class Character {
+    public class Character : Node {
         public struct JobMetadata {
             public bool Unlocked;
             public int Level;
@@ -16,7 +17,7 @@ namespace Scripts.Characters {
             public List<JobAbility> UnlockedAbilities;
         }
 
-        public string Name { get; set; } = "ArkTheOverlord";
+        public string CharacterName { get; set; } = "TestTestTest";
         public int CharacterLevel { get; set; } = 0;
         public Job CurrentJob { get; set; } = new Job();
         public int CurrentJobLevel { get; private set; } = 0;
@@ -43,7 +44,7 @@ namespace Scripts.Characters {
         public float LightningResistence { get; set; } = 0;
         public float ColdResistence { get; set; } = 0;
         //MovementStats
-        public float Move { get; set; } = 0;
+        public float Move { get; set; } = 2;
         public float Speed { get; set; } = 0;
         public float Jump { get; set; } = 0;
 
@@ -304,7 +305,7 @@ namespace Scripts.Characters {
 
         public Character Copy() {
             var copy = new Character();
-            copy.Name = Name;
+            copy.CharacterName = CharacterName;
             copy.CharacterLevel = CharacterLevel;
             copy.CurrentJob = CurrentJob;
             copy.JobMeta = JobMeta;
