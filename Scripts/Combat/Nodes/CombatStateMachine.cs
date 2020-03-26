@@ -11,8 +11,8 @@ namespace Scripts.Combat.Nodes {
     public class CombatStateMachine : Node {
         public List<CharacterState> Units { get; private set; }
 
-        private Dictionary<CharacterState, StateChanges> uncommitedChanges;
-        
+        private Dictionary<CharacterState, StatChanges> uncommitedChanges;
+
         private int currentID = 1;
 
         private List<Vector3> LastMovementArea;
@@ -56,39 +56,8 @@ namespace Scripts.Combat.Nodes {
 
         }
 
-        public void GetMoveArea(int id, Vector3 center, HUD hud) {
-            CharacterState character = null;
-            foreach (var unit in Units) {
-                if (unit.ID == id) {
-                    character = unit;
-                }
-            }
-
-            List<Vector3> area = new List<Vector3>();
-            for (int x = (int)character.BaseCharacter.Move; x > 0; x--) {
-                for (int z = ((int)character.BaseCharacter.Move) - x; z >= 0; z--) {
-                    area.Add(center + new Vector3(x, -0.5f, z));
-                    area.Add(center + new Vector3(-x, -0.5f, z));
-                    if (z > 0) {
-                        area.Add(center + new Vector3(x, -0.5f, -z));
-                        area.Add(center + new Vector3(-x, -0.5f, -z));
-                    }
-                }
-            }
-
-            for (int z = (int)character.BaseCharacter.Move; z > (int)-character.BaseCharacter.Move - 1; z--) {
-                area.Add(center - new Vector3(0, 0.5f, z));
-            }
-
-            area.Remove(center - new Vector3(0, 0.5f, 0));
-
-            LastMovementArea = area;
-
-            hud.DisplayMovementArea(area);
-        }
-
-        private void OnMovementLocationSelected(int id, Vector3 location){
-            if(LastMovementArea.Contains(location)){
+        private void OnMovementLocationSelected(int id, Vector3 location) {
+            if (LastMovementArea.Contains(location)) {
                 EmitSignal(nameof(ValidMovementLocationSelected));
             }
         }
@@ -96,15 +65,6 @@ namespace Scripts.Combat.Nodes {
 
         public void UnitItem(CharacterState unit, Tile target) {
 
-        }
-
-        public void OnCharacterHighlighted(int id, HUD hud) {
-            foreach (var unit in Units) {
-                if (unit.ID == id) {
-                    hud.ShowCharacterPanel(unit);
-                    return;
-                }
-            }
         }
 
         #region Character Adding
@@ -122,8 +82,15 @@ namespace Scripts.Combat.Nodes {
             }
 
             if (character.CharacterName == "TestTestTest") {
-                Units[0].Position = new Vector3(1.5f, 0.51f, 1.5f);
-                ccm.AddCharacter(currentID - 1, new Vector3(1.5f, 0.51f, 1.5f));
+                foreach (var unit in Units) {
+                    if (unit.ID == currentID - 1) {
+                        StatChanges changes = new StatChanges();
+                        changes.Position = new Vector3(1.5f, 0.51f, 1.5f);
+                        unit.TurnEndUpdate(changes);
+                        ccm.AddCharacter(unit, new Vector3(1.5f, 0.51f, 1.5f));
+                        break;
+                    }
+                }
             }
             else {
 
@@ -137,8 +104,9 @@ namespace Scripts.Combat.Nodes {
 
         public void AddPC(CharacterState PC) {
             if (PC.ID != currentID) {
-                PC.ID = currentID;
-                currentID++;
+                if (PC.SetID(currentID)) {
+                    currentID++;
+                }
             }
             Units.Add(PC);
 
@@ -165,8 +133,9 @@ namespace Scripts.Combat.Nodes {
 
         public void AddNPC(CharacterState NPC) {
             if (NPC.ID != currentID) {
-                NPC.ID = currentID;
-                currentID++;
+                if (NPC.SetID(currentID)) {
+                    currentID++;
+                }
             }
             Units.Add(NPC);
 
@@ -193,8 +162,9 @@ namespace Scripts.Combat.Nodes {
 
         public void AddGuest(CharacterState Guest) {
             if (Guest.ID != currentID) {
-                Guest.ID = currentID;
-                currentID++;
+                if (Guest.SetID(currentID)) {
+                    currentID++;
+                }
             }
             Units.Add(Guest);
 

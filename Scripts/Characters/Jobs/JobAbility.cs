@@ -88,9 +88,4 @@ namespace Scripts.Characters.Jobs {
     public enum DamageType {
         Melee, Ranged, Magical
     }
-
-    public enum Stat {
-        HP, MP, Strength, Dexterity, Intellect, PhysicalCritChance, MagicalCritChance, 
-        Constitution, Wisdom, Evade, Block, Move, Speed, Jump, HPRegen, MPRegen
-    }
 }

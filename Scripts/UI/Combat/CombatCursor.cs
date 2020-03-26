@@ -19,13 +19,15 @@ public class CombatCursor : Area {
     private float timeSincePressed = 0f;
     private float timeSinceLastMove = 0f;
     private bool menuLocked = false;
-    private bool movementLocked = false;
+    private bool characterMovementLocked = false;
 
     private Spatial cameraPivot;
     private Camera camera;
     private CharacterBody overlapingEntity = null;
     private PhysicsDirectSpaceState spaceState;
     private static bool alreadyCreated = false;
+    //private CharacterBody movingCharacter;
+    //private bool isCharacterMoving = false;
 
     public const string CameraPivot = "CameraPivot";
     public const string CameraPath = "CameraPivot/Camera";
@@ -57,7 +59,7 @@ public class CombatCursor : Area {
     public delegate void OnCharacterDehighlighted();
 
     [Signal]
-    public delegate void MovementLocationSelected(Vector3 location);
+    public delegate void MovementLocationSelected(Vector3 location, CharacterBody body);
     #endregion
 
     public override void _Ready() {
@@ -75,6 +77,12 @@ public class CombatCursor : Area {
 
         if (Input.IsActionJustPressed("Exit")) {
             GetTree().Quit();
+        }
+
+        if (Input.IsActionJustPressed("Back")) {
+            characterMovementLocked = false;
+            menuLocked = true;
+            Translation = overlapingEntity.Translation - new Vector3(0, 0.51f, 0);
         }
     }
 
@@ -248,7 +256,7 @@ public class CombatCursor : Area {
 
     private void ProcessInteraction() {
         if (Input.IsActionJustPressed(Interact)) {
-            if (overlapingEntity != null && !movementLocked) {
+            if (overlapingEntity != null && !characterMovementLocked) {
                 if (overlapingEntity.GetType() == typeof(CharacterBody)) {
                     if (GetOverlapingEntityType() == Team.PC) {
                         if (Input.GetMouseMode() == Input.MouseMode.Captured) {
@@ -262,8 +270,9 @@ public class CombatCursor : Area {
                     }
                 }
             }
-            else if (movementLocked) {
-                EmitSignal(nameof(MovementLocationSelected), Translation);
+            else if (characterMovementLocked) {
+                EmitSignal(nameof(MovementLocationSelected), Translation, overlapingEntity);
+                characterMovementLocked = false;
             }
             else {
 
@@ -281,12 +290,14 @@ public class CombatCursor : Area {
     }
 
     private void OnBodyExited(Node body) {
-        overlapingEntity = null;
-        EmitSignal(nameof(OnCharacterDehighlighted));
+        if (!characterMovementLocked) {
+            overlapingEntity = null;
+            EmitSignal(nameof(OnCharacterDehighlighted));
+        }
     }
 
     private Team GetOverlapingEntityType() {
-        return ((CharacterBody)overlapingEntity).Team;
+        return ((CharacterBody)overlapingEntity).State.CharacterTeam;
     }
 
     private Vector3 GetDirectionFromPivotRotation(Vector3 direction) {
@@ -311,9 +322,9 @@ public class CombatCursor : Area {
         menuLocked = false;
     }
 
-    public void OnMoveButtonPressed() {
+    public void OnMoveButtonPressed(CharacterState state) {
         menuLocked = false;
-        movementLocked = true;
+        characterMovementLocked = true;
     }
     #endregion
 }

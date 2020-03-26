@@ -3,10 +3,8 @@ using Scripts.Items;
 using Scripts.Items.Accessories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Godot;
+using Scripts.Combat.States;
 
 namespace Scripts.Characters {
     public class Character : Node {
@@ -17,36 +15,38 @@ namespace Scripts.Characters {
             public List<JobAbility> UnlockedAbilities;
         }
 
-        public string CharacterName { get; set; } = "TestTestTest";
-        public int CharacterLevel { get; set; } = 0;
-        public Job CurrentJob { get; set; } = new Job();
+        public string CharacterName { get; private set; } = "TestTestTest";
+        public int CharacterLevel { get; private set; } = 0;
+        public Job CurrentJob { get; private set; } = new Job();
         public int CurrentJobLevel { get; private set; } = 0;
-        public Dictionary<Job, JobMetadata> JobMeta { get; set; } = null;
-        public List<Job> EquipedJobAbilities { get; set; } = null;
+        public Dictionary<Job, JobMetadata> JobMeta { get; private set; } = null;
+        public List<Job> EquipedJobAbilities { get; private set; } = null;
 
         //Resources
-        public float Health { get; set; } = 6969;
-        public float Mana { get; set; } = 420;
-        public float HealthRegen { get; set; } = 0;
-        public float ManaRegen { get; set; } = 0;
+        private float Health = 6969;
+        private float Mana = 420;
+        private float HealthRegen = 0;
+        private float ManaRegen = 0;
         //Attack Stats
-        public float Strength { get; set; } = 0;
-        public float Dexterity { get; set; } = 0;
-        public float Intellect { get; set; } = 0;
-        public float PhysicalCritChance { get; set; } = 0;
-        public float MagicalCritChance { get; set; } = 0;
+        private float Strength = 0;
+        private float Dexterity = 0;
+        private float Intellect = 0;
+        private float PhysicalCritChance = 0;
+        private float MagicalCritChance = 0;
         //Defense Stats
-        public float Constitution { get; set; } = 0;
-        public float Wisdom { get; set; } = 0;
-        public float Evade { get; set; } = 0;
-        public float Block { get; set; } = 0;
-        public float FireResistence { get; set; } = 0;
-        public float LightningResistence { get; set; } = 0;
-        public float ColdResistence { get; set; } = 0;
+        private float Constitution = 0;
+        private float Wisdom = 0;
+        private float Evade = 0;
+        private float Block = 0;
+        private float FireResistence = 0;
+        private float LightningResistence = 0;
+        private float ColdResistence = 0;
         //MovementStats
-        public float Move { get; set; } = 2;
-        public float Speed { get; set; } = 0;
-        public float Jump { get; set; } = 0;
+        public float Move = 5;
+        public float Speed = 0;
+        public float Jump = 0;
+
+        public Dictionary<Stat, Func<float>> StatTotals;
 
         public Equipment MainHand { get; set; } = new Equipment();
         public Equipment OffHand { get; set; } = new Equipment();
@@ -55,6 +55,33 @@ namespace Scripts.Characters {
         public Equipment LegArmor { get; set; } = new Equipment();
         public Accessory AccessoryOne { get; set; } = new Accessory();
         public Accessory AccessoryTwo { get; set; } = new Accessory();
+
+        public Character(){
+            InitStateTotals();
+        }
+
+        private void InitStateTotals(){
+            StatTotals = new Dictionary<Stat, Func<float>>();
+            StatTotals.Add(Stat.Health, GetTotalHealth);
+            StatTotals.Add(Stat.Mana, GetTotalMana);
+            StatTotals.Add(Stat.HealthRegen, GetTotalHealthRegen);
+            StatTotals.Add(Stat.ManaRegen, GetTotalManaRegen);
+            StatTotals.Add(Stat.Strength, GetTotalStrength);
+            StatTotals.Add(Stat.Dexterity, GetTotalDexterity);
+            StatTotals.Add(Stat.Intellect, GetTotalIntellect);
+            StatTotals.Add(Stat.PhysicalCritChance, GetTotalPhysicalCritChance);
+            StatTotals.Add(Stat.MagicalCritChance, GetTotalMagicalCritChance);
+            StatTotals.Add(Stat.Constitution, GetTotalConstitution);
+            StatTotals.Add(Stat.Wisdom, GetTotalWisdom);
+            StatTotals.Add(Stat.Evade, GetTotalEvadeChance);
+            StatTotals.Add(Stat.Block, GetTotalBlockChance);
+            StatTotals.Add(Stat.FireResistence, GetTotalFireResistence);
+            StatTotals.Add(Stat.LightningResistence, GetTotalLightningResistence);
+            StatTotals.Add(Stat.ColdResistence, GetTotalColdResistence);
+            StatTotals.Add(Stat.Move, GetTotalMove);
+            StatTotals.Add(Stat.Speed, GetTotalSpeed);
+            StatTotals.Add(Stat.Jump, GetTotalJump);
+        }
 
         public int RemoveMainHand() {
             var temp = MainHand.ID;
@@ -339,5 +366,13 @@ namespace Scripts.Characters {
 
             return copy;
         }
+    }
+
+    public enum Stat {
+        Health, MaxHealth, Mana, MaxMana, HealthRegen, ManaRegen,
+        Strength, Dexterity, Intellect, PhysicalCritChance, MagicalCritChance,
+        Constitution, Wisdom, Evade, Block,
+        FireResistence, LightningResistence, ColdResistence,
+        Move, Speed, Jump
     }
 }

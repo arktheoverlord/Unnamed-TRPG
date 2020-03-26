@@ -57,7 +57,7 @@
     <Compile Include="Scripts\Combat\Nodes\CombatCharacterManager.cs" />
     <Compile Include="Scripts\Combat\Nodes\CombatManager.cs" />
     <Compile Include="Scripts\Combat\Nodes\CombatStateMachine.cs" />
-    <Compile Include="Scripts\Combat\StateChanges.cs" />
+    <Compile Include="Scripts\Combat\StatChanges.cs" />
     <Compile Include="Scripts\Combat\States\CharacterState.cs" />
     <Compile Include="Scripts\Combat\States\AIState.cs" />
     <Compile Include="Scripts\Combat\StatusEffect.cs" />
@@ -70,6 +70,7 @@
     <Compile Include="Scripts\Items\Equipment.cs" />
     <Compile Include="Scripts\UI\Combat\CombatCursor.cs" />
     <Compile Include="Scripts\UI\Combat\HUD.cs" />
+    <Content Include=".vscode\launch.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,50 +4,142 @@ using Scripts.Characters;
 using System.Collections.Generic;
 
 namespace Scripts.Combat.States {
-    public class CharacterState {
+    public class CharacterState : Node {
         public Character BaseCharacter { get; private set; }
         public Team CharacterTeam { get; private set; }
-        public int ID { get; set; }
-        public Vector3 Position { get; set; }
+        public int ID { get; private set; }
+        public Vector3 Position { get; private set; }
+        public Dictionary<Stat, float> StatModifiers { get; private set; }
 
-        //Resources
-        public float MaxHealth { get; set; } = 0;
-        public float CurrentHealth { get; set; } = 0;
-        public float MaxMana { get; set; } = 0;
-        public float CurrentMana { get; set; } = 0;
-        public float HealthRegen { get; set; } = 0;
-        public float ManaRegen { get; set; } = 0;
-        //Attack Stats
-        public float StrengthModifier { get; set; } = 0;
-        public float DexterityModifier { get; set; } = 0;
-        public float IntellectModifier { get; set; } = 0;
-        public float PhysicalCritChanceModifier { get; set; } = 0;
-        public float MagicalCritChanceModifier { get; set; } = 0;
-        //Defense Stats
-        public float ConstitutionModifier { get; set; } = 0;
-        public float WisdomModifier { get; set; } = 0;
-        public float EvadeModifier { get; set; } = 0;
-        public float BlockModifier { get; set; } = 0;
-        public float FireResistenceModifier { get; set; } = 0;
-        public float LightningResistenceModifier { get; set; } = 0;
-        public float IceResistenceModifier { get; set; } = 0;
-        //MovementStats
-        public float MoveModifier { get; set; } = 0;
-        public float SpeedModifier { get; set; } = 0;
-        public float JumpModifier { get; set; } = 0;
+        public float CurrentHealth { get; private set; } = 0;
+        public float CurrentMana { get; private set; } = 0;
 
-        public Dictionary<StatusEffect, int> StatusEffects;
+        public Dictionary<StatusEffect, List<int>> StatusEffects;
 
         public CharacterState(Character baseCharacter, Team type, int id) {
-            StatusEffects = new Dictionary<StatusEffect, int>();
+            StatusEffects = new Dictionary<StatusEffect, List<int>>();
             BaseCharacter = baseCharacter;
             CharacterTeam = type;
             ID = id;
-            MaxHealth = BaseCharacter.Health;
-            CurrentHealth = BaseCharacter.Health;
-            MaxMana = BaseCharacter.Mana;
-            CurrentMana = BaseCharacter.Mana;
+            InitStatModifers();
+            CurrentHealth = GetStatTotal(Stat.Health);
+            CurrentMana = GetStatTotal(Stat.Mana);
         }
+
+        private void InitStatModifers() {
+            StatModifiers = new Dictionary<Stat, float>();
+            foreach (var stat in (Stat[])Enum.GetValues(typeof(Stat))) {
+                StatModifiers.Add(stat, 0);
+            }
+        }
+
+        public void SetStatModifier(Stat stat, float amount){
+            StatModifiers[stat] = amount;
+        }
+
+        public void AddStatModifier(Stat stat, float amount){
+            StatModifiers[stat] += amount;
+        }
+
+        public float GetStatTotal(Stat stat) {
+            return BaseCharacter.StatTotals[stat]() + StatModifiers[stat];
+        }
+
+        public void TurnStartUpdate() {
+
+        }
+
+        public void TurnEndUpdate(StatChanges changes) {
+            UpdateMaxHealth(changes.MaxHealthModifier);
+            CurrentHealth += changes.CurrentHealthModifier;
+            UpdateMaxMana(changes.MaxManaModifier);
+            CurrentMana += changes.CurrentManaModifier;
+            Position = changes.Position;
+            /*StatModifiers[S] += changes.HealthRegen;
+            ManaRegen += changes.ManaRegen;
+
+            StrengthModifier += changes.StrengthModifier;
+            DexterityModifier += changes.DexterityModifier;
+            IntellectModifier += changes.IntellectModifier;
+            PhysicalCritChanceModifier += changes.PhysicalCritChanceModifier;
+            MagicalCritChanceModifier += changes.MagicalCritChanceModifier;
+
+            ConstitutionModifier += changes.ConstitutionModifier;
+            WisdomModifier += changes.WisdomModifier;
+            EvadeModifier += changes.EvadeModifier;
+            BlockModifier += changes.BlockModifier;
+            FireResistenceModifier += changes.FireResistenceModifier;
+            LightningResistenceModifier += changes.LightningResistenceModifier;
+            ColdResistenceModifier += changes.ColdResistenceModifier;
+            MoveModifier += changes.MoveModifier;
+            SpeedModifier += changes.SpeedModifier;
+            JumpModifier += changes.JumpModifier;*/
+        }
+
+        public bool SetID(int id) {
+            if (ID == 0) {
+                ID = id;
+                return true;
+            }
+            return false;
+        }
+
+        public void UpdateMaxHealth(float magnitude) {
+            StatModifiers[Stat.Health] += magnitude;
+            if (magnitude > 0) {
+                CurrentHealth += magnitude;
+            }
+            if (CurrentHealth > StatModifiers[Stat.Health]) {
+                CurrentHealth = StatModifiers[Stat.Health];
+            }
+        }
+
+        #region Status Effect Methods
+        public void UpdateMaxMana(float magnitude) {
+            StatModifiers[Stat.Mana] += magnitude;
+            if (magnitude > 0) {
+                CurrentMana += magnitude;
+            }
+            if (CurrentMana > StatModifiers[Stat.Mana]) {
+                CurrentMana = StatModifiers[Stat.Mana];
+            }
+        }
+
+        public void UpdateStateEffect(StatusEffect effect, int turn = 1) {
+            if (turn == -1) {
+                StatusEffects[effect][0] = 0;
+            }
+            else {
+                StatusEffects[effect][0] += turn;
+                StatusEffects[effect][1] -= turn;
+            }
+        }
+
+        public void CheckStatusEffectsForRemovel() {
+            foreach (var key in StatusEffects.Keys) {
+                if (StatusEffects[key][0] == 0) {
+                    if (key.HasEndOfTurnEffect) {
+                        foreach (var stat in (Stat[])Enum.GetValues(typeof(Stat))) {
+
+                        }
+                    }
+                }
+            }
+        }
+
+        private float RemoveStatusEffect(StatusEffect effect, Stat stat, float baseValue, int turnsActive) {
+            if (CanEffectBeRemoved(effect, stat)) {
+                float percentModiferTotal = (baseValue * effect.StatPercentModifiers[stat]) * turnsActive;
+                float modifierTotal = effect.StatModifers[stat] * turnsActive;
+                return percentModiferTotal + modifierTotal;
+            }
+            return 0;
+        }
+
+        private bool CanEffectBeRemoved(StatusEffect effect, Stat stat) {
+            return effect.EOTEffects.Contains(stat) && !effect.EOTEffects.Contains(stat);
+        }
+        #endregion
     }
 
     public enum Team {

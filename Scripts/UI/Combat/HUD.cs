@@ -2,14 +2,12 @@ using Godot;
 using System.Collections.Generic;
 using Scripts.Combat.States;
 using Scripts.Combat.Nodes;
+using Scripts.Characters;
 
 public class HUD : Node {
     //Debug Stuff
     private Label test;
     private Label fpsCounter;
-
-    [Export]
-    public PackedScene BlueAreaHighlight;
 
     private Panel characterPanel;
     private Label characterName;
@@ -19,18 +17,16 @@ public class HUD : Node {
     private Label MP;
 
     private Panel actionPanel;
+    private bool isMoving = false;
 
-    private CharacterState state;
+    private CharacterBody body;
 
     #region Signals
     [Signal]
     public delegate void OnExit();
 
     [Signal]
-    public delegate void MoveButtonPressed(int id, Vector3 center, HUD hud);
-
-    [Signal]
-    public delegate void OnCharacterHighlighted(int id, HUD hud);
+    public delegate void MoveButtonPressed(CharacterState state);
     #endregion
 
     public override void _Ready() {
@@ -47,23 +43,23 @@ public class HUD : Node {
 
     public override void _Process(float delta) {
         fpsCounter.Text = Engine.GetFramesPerSecond().ToString();
+        if(isMoving && Input.IsActionJustPressed("Back")){
+            isMoving = false;
+            actionPanel.Visible = true;
+        }
     }
 
     public void OnPCInteracted(CharacterBody body) {
         actionPanel.Visible = true;
     }
 
-    public void CharacterHighlighted(CharacterBody body){
-        EmitSignal(nameof(OnCharacterHighlighted), body.CharacterID, this);
-    }
-
-    public void ShowCharacterPanel(CharacterState state) {
-        this.state = state;
-        characterName.Text = state.BaseCharacter.CharacterName;
-        characterLevel.Text = state.BaseCharacter.CharacterLevel.ToString();
-        characterClass.Text = state.BaseCharacter.CurrentJob.Name;
-        HP.Text = state.CurrentHealth + "/" + state.MaxHealth;
-        MP.Text = state.CurrentMana + "/" + state.MaxMana;
+    public void OnCharacterHighlighted(CharacterBody body){
+        this.body = body;
+        characterName.Text = body.State.BaseCharacter.CharacterName;
+        characterLevel.Text = body.State.BaseCharacter.CharacterLevel.ToString();
+        characterClass.Text = body.State.BaseCharacter.CurrentJob.Name;
+        HP.Text = body.State.CurrentHealth + "/" + body.State.GetStatTotal(Stat.Health);
+        MP.Text = body.State.CurrentMana + "/" + body.State.GetStatTotal(Stat.Mana);
         characterPanel.Visible = true;
     }
 
@@ -81,15 +77,9 @@ public class HUD : Node {
     }
 
     public void OnMoveButtonPressed(){
-        EmitSignal(nameof(MoveButtonPressed), state.ID, state.Position, this);
-    }
-
-    public void DisplayMovementArea(List<Vector3> area){
-        foreach(var vector in area){
-            var instance = BlueAreaHighlight.Instance();
-            ((Sprite3D) instance).Translation = vector;
-            GetNode<Spatial>("AreaHighlight").AddChild(instance);
-        }
+        actionPanel.Visible = false;
+        isMoving = true;
+        EmitSignal(nameof(MoveButtonPressed), body.State);
     }
 
     public void OnInfoButtonPressed(){
