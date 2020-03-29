@@ -68,10 +68,13 @@
     <Compile Include="Scripts\Items\Accessories\Accessory.cs" />
     <Compile Include="Scripts\Items\Accessories\AccessoryAffix.cs" />
     <Compile Include="Scripts\Items\Equipment.cs" />
+    <Compile Include="Scripts\Managers\CharacterManager.cs" />
+    <Compile Include="Scripts\Managers\InventoryManager.cs" />
     <Compile Include="Scripts\UI\Combat\CombatCursor.cs" />
     <Compile Include="Scripts\UI\Combat\HUD.cs" />
     <Compile Include="Scripts\Combat\Nodes\AreaHighlight.cs" />
-    <Compile Include="Scripts\Helpers\PhysicsHelpers.cs"/>
+    <Compile Include="Scripts\Helpers\PhysicsHelpers.cs" />
+    <Compile Include="Scripts\GameManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

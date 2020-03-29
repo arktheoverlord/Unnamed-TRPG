@@ -1,4 +1,4 @@
-﻿namespace Scripts.Items {
+﻿namespace TRPG.Items {
     ///<summary>The base class for all accessory affixes</summary>
     public class AccessoryAffix {
         public string Name { get; set; }

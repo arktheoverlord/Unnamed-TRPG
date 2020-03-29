@@ -1,4 +1,4 @@
-﻿namespace Scripts.Items {
+﻿namespace TRPG.Items {
     ///<summary>The base class for all items.</summary>
     public class Item {
         public string Name { get; set; }

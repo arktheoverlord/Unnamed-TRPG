@@ -1,44 +1,41 @@
 using Godot;
-using Scripts.Combat.Mapping;
-using Scripts.Characters;
-using Scripts.Helper;
+using Godot.Collections;
+using TRPG.Combat.Mapping;
+using TRPG.Characters;
+using TRPG.Helper;
 
-namespace Scripts.Combat.Nodes {
+namespace TRPG.Combat.Nodes {
     public class AreaHighlight : Area {
+
         private PhysicsDirectSpaceState spaceState;
 
         public override void _Ready() {
             spaceState = GetWorld().GetDirectSpaceState();
+            
+            if(!WithinMap()){
+                QueueFree();
+            }
         }
 
-        private void OnAreaEntered(Area area){
-            if(area.GetType() == typeof(Tile)){
-                int tileHeight = ((Tile) area).GetHighestTile();
+
+        private bool WithinMap() {
+            var cast = spaceState.IntersectRay(Translation + Vector3.Up * 2, Translation - (Vector3.Up * 100), new Array() { this });
+            //GD.Print("Translation: " + Translation + ", Start: " + (Translation + Vector3.Up) + ", Target: " + (Translation - (Vector3.Up * 100)));
+
+            if (cast.Count == 0) {
+                GD.Print("Translation: " + Translation + ", Start: " + (Translation + Vector3.Up * 2) + ", Target: " + (Translation - (Vector3.Up * 100)));
+                return false;
             }
+
+            return true;
+        }
+
+        private void OnAreaEntered(Area area) {
+
         }
 
         private void OnBodyEntered(Node body) {
             QueueFree();
-            if (body.GetType() == typeof(CharacterBody)) {
-                QueueFree();
-            }
-            if (body.GetType() == typeof(Tile)) {
-                float maxHeight = ((CharacterBody)GetParent().GetParent()).State.GetStatTotal(Stat.Jump);
-
-                var yOffSet = PhysicsHelper.GetYOffset(this, Translation, spaceState);
-
-                if (yOffSet.z == -1) {
-                    QueueFree();
-                    return;
-                }
-
-                if (yOffSet.y > maxHeight || yOffSet.y < -maxHeight) {
-                    QueueFree();
-                    return;
-                }
-
-                Translation += yOffSet;
-            }
         }
     }
 }

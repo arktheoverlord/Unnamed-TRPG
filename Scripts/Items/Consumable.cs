@@ -1,11 +1,11 @@
-﻿using Scripts.Combat;
+﻿using TRPG.Combat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Scripts.Items {
+namespace TRPG.Items {
     public class Consumable : Item {
         public bool RestoresHealth { get; set; }
         public float AmountRestored { get; set; }

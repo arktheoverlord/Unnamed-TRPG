@@ -1,4 +1,4 @@
-﻿namespace Scripts.Characters.Jobs {
+﻿namespace TRPG.Characters.Jobs {
     public class Job {
         public struct UnlockRequirment {
             public Job Job { get; set; }

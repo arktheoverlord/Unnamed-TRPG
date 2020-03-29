@@ -1,9 +1,9 @@
 using Godot;
 using System;
-using Scripts.Combat.States;
-using Scripts.Characters;
+using TRPG.Combat.States;
+using TRPG.Characters;
 
-namespace Scripts.Combat.Nodes {
+namespace TRPG.Combat.Nodes {
     public class CombatCharacterManager : Node {
         [Export]
         public PackedScene Character;

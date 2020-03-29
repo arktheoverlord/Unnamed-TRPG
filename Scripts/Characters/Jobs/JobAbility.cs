@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Scripts.Combat;
+using TRPG.Combat;
 
-namespace Scripts.Characters.Jobs {
+namespace TRPG.Characters.Jobs {
     public class JobAbility {
         public string Name { get; set; }
         public string Description { get; set; }

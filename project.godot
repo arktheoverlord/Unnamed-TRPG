@@ -19,6 +19,12 @@ config/name="TRPG"
 run/main_scene="res://Test/TestWorld.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GameManager="*res://Scenes/GameManager.tscn"
+CharacterManager="*res://Scripts/Managers/CharacterManager.cs"
+InventoryManager="*res://Scripts/Managers/InventoryManager.cs"
+
 [display]
 
 window/size/width=1920

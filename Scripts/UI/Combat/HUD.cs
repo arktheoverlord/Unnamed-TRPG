@@ -1,10 +1,10 @@
 using Godot;
 using System.Collections.Generic;
-using Scripts.Combat.States;
-using Scripts.Combat.Nodes;
-using Scripts.Characters;
+using TRPG.Combat.States;
+using TRPG.Combat.Nodes;
+using TRPG.Characters;
 
-namespace Scripts.UI.Combat {
+namespace TRPG.UI.Combat {
     public class HUD : Node {
         //Debug Stuff
         private Label test;

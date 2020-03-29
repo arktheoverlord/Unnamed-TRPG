@@ -1,13 +1,13 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using Scripts.Combat.States;
-using Scripts.Combat.Mapping;
-using Scripts.Characters;
-using Scripts.Characters.Jobs;
-using Scripts.Items;
+using TRPG.Combat.States;
+using TRPG.Combat.Mapping;
+using TRPG.Characters;
+using TRPG.Characters.Jobs;
+using TRPG.Items;
 
-namespace Scripts.Combat.Nodes {
+namespace TRPG.Combat.Nodes {
     public class CombatStateMachine : Node {
         public List<CharacterState> Units { get; private set; }
 
@@ -85,9 +85,10 @@ namespace Scripts.Combat.Nodes {
                 foreach (var unit in Units) {
                     if (unit.ID == currentID - 1) {
                         StatChanges changes = new StatChanges();
-                        changes.Position = new Vector3(1.5f, 0.51f, 1.5f);
+                        var pos = new Vector3(3f, 1.01f, 3f);
+                        changes.Position = pos;
                         unit.TurnEndUpdate(changes);
-                        ccm.AddCharacter(unit, new Vector3(1.5f, 0.51f, 1.5f));
+                        ccm.AddCharacter(unit, pos);
                         break;
                     }
                 }

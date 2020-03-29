@@ -1,9 +1,9 @@
 using Godot;
 using System.Collections.Generic;
-using Scripts.Combat.States;
-using Scripts.Characters;
+using TRPG.Combat.States;
+using TRPG.Characters;
 
-namespace Scripts.Combat {
+namespace TRPG.Combat {
     public class StatusEffect {
         public string EffectName { get; set; }
         public int Duration { get; set; }

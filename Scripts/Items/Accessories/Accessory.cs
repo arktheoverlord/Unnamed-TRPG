@@ -1,6 +1,6 @@
-﻿using Scripts.Items;
+﻿using TRPG.Items;
 
-namespace Scripts.Items.Accessories {
+namespace TRPG.Items.Accessories {
     public class Accessory : Equipment {
         public AccessoryAffix Prefix { get; set; } = null;
         public AccessoryAffix Sufix { get; set; } = null;

@@ -1,4 +1,4 @@
-namespace Scripts.Items.Accessories{
+namespace TRPG.Items.Accessories{
     public class AccessoryGenerator {
         
     }

@@ -1,9 +1,9 @@
 using Godot;
 using System;
-using Scripts.Characters;
+using TRPG.Characters;
 using System.Collections.Generic;
 
-namespace Scripts.Combat.States {
+namespace TRPG.Combat.States {
     public class CharacterState : Node {
         public Character BaseCharacter { get; private set; }
         public Team CharacterTeam { get; private set; }

@@ -1,12 +1,12 @@
-using Scripts.Characters.Jobs;
-using Scripts.Items;
-using Scripts.Items.Accessories;
+using TRPG.Characters.Jobs;
+using TRPG.Items;
+using TRPG.Items.Accessories;
 using System;
 using System.Collections.Generic;
 using Godot;
-using Scripts.Combat.States;
+using TRPG.Combat.States;
 
-namespace Scripts.Characters {
+namespace TRPG.Characters {
     public class Character : Node {
         public struct JobMetadata {
             public bool Unlocked;
@@ -42,7 +42,7 @@ namespace Scripts.Characters {
         private float LightningResistence = 0;
         private float ColdResistence = 0;
         //MovementStats
-        public float Move = 5;
+        public float Move = 2;
         public float Speed = 0;
         public float Jump = 1;
 

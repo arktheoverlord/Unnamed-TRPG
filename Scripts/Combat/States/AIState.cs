@@ -1,7 +1,7 @@
-using Scripts.Characters;
+using TRPG.Characters;
 using System.Collections.Generic;
 
-namespace Scripts.Combat.States {
+namespace TRPG.Combat.States {
     public class AIState : CharacterState {
         public Dictionary<CharacterState, float> AggroList { get; private set; }
 

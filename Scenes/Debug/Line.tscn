@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Meshes/Floors/SimpleCube.obj" type="ArrayMesh" id=1]
+
+[node name="Line" type="Spatial"]
+transform = Transform( 0.01, 0, 0, 0, 10, 0, 0, 0, 0.01, 0, 10, 0 )
+
+[node name="SimpleCube" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+material/0 = null

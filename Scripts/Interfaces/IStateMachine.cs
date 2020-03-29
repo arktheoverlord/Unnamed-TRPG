@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Scripts.Interfaces {
+namespace TRPG.Interfaces {
     public interface IStateMachine {
         void StartMachine();
 

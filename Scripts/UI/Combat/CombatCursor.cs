@@ -1,13 +1,13 @@
 using Godot;
 using Godot.Collections;
-using Scripts;
-using Scripts.Combat;
-using Scripts.Combat.States;
-using Scripts.Combat.Mapping;
-using Scripts.Combat.Nodes;
-using Scripts.Helper;
+using TRPG;
+using TRPG.Combat;
+using TRPG.Combat.States;
+using TRPG.Combat.Mapping;
+using TRPG.Combat.Nodes;
+using TRPG.Helper;
 
-namespace Scripts.UI.Combat {
+namespace TRPG.UI.Combat {
     public class CombatCursor : Area {
         [Export]
         private float mouseSens = 0.01f;
@@ -29,10 +29,11 @@ namespace Scripts.UI.Combat {
         private Spatial cameraPivot;
         private Camera camera;
         private PhysicsDirectSpaceState spaceState;
+        private GridMap map;
 
+        public const float MoveDistence = 2f;
         public const string CameraPivot = "CameraPivot";
         public const string CameraPath = "CameraPivot/Camera";
-        public const float MoveDistence = 1f;
         public const string Up = "MovementUp";
         public const string Down = "MovementDown";
         public const string Left = "MovementLeft";
@@ -185,29 +186,29 @@ namespace Scripts.UI.Combat {
                 case Right:
                     var offset = GetDirectionFromPivotRotation(new Vector3(MoveDistence, 0, 0));
                     var target = offset + Translation + new Vector3(0, 0.5F, 0);
-                    if (IsTargetWithinMap(target)) {
-                        Translation += offset + PhysicsHelper.GetYOffset(this, target, spaceState);
+                    if (PhysicsHelper.IsTargetWithinMap(this, target, spaceState)) {
+                        Translation += offset + new Vector3(0, PhysicsHelper.GetYOffset(this, offset, spaceState), 0);
                     }
                     break;
                 case Left:
                     offset = GetDirectionFromPivotRotation(new Vector3(-MoveDistence, 0, 0));
                     target = offset + Translation + new Vector3(0, 0.5F, 0);
-                    if (IsTargetWithinMap(target)) {
-                        Translation += offset + PhysicsHelper.GetYOffset(this, target, spaceState);
+                    if (PhysicsHelper.IsTargetWithinMap(this, target, spaceState)) {
+                        Translation += offset + new Vector3(0, PhysicsHelper.GetYOffset(this, offset, spaceState), 0);
                     }
                     break;
                 case Up:
                     offset = GetDirectionFromPivotRotation(new Vector3(0, 0, -MoveDistence));
                     target = offset + Translation + new Vector3(0, 0.5F, 0);
-                    if (IsTargetWithinMap(target)) {
-                        Translation += offset + PhysicsHelper.GetYOffset(this, target, spaceState);
+                    if (PhysicsHelper.IsTargetWithinMap(this, target, spaceState)) {
+                        Translation += offset + new Vector3(0, PhysicsHelper.GetYOffset(this, offset, spaceState), 0);
                     }
                     break;
                 case Down:
                     offset = GetDirectionFromPivotRotation(new Vector3(0, 0, MoveDistence));
                     target = offset + Translation + new Vector3(0, 0.5F, 0);
-                    if (IsTargetWithinMap(target)) {
-                        Translation += offset + PhysicsHelper.GetYOffset(this, target, spaceState);
+                    if (PhysicsHelper.IsTargetWithinMap(this, target, spaceState)) {
+                        Translation += offset + new Vector3(0, PhysicsHelper.GetYOffset(this, offset, spaceState), 0);
                     }
                     break;
             }

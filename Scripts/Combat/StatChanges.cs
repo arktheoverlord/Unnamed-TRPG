@@ -1,8 +1,8 @@
 using Godot;
-using Scripts.Characters;
+using TRPG.Characters;
 using System.Collections.Generic;
 
-namespace Scripts.Combat {
+namespace TRPG.Combat {
     public class StatChanges {
         public int ID { get; set; }
         public Vector3 Position { get; set; }

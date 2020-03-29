@@ -1,4 +1,4 @@
-namespace Scripts.Items {
+namespace TRPG.Items {
     ///<summary>The base class for all equipment</summary>
     public class Equipment : Item {
         public EquipmentType EquipmentType { get; set; } = EquipmentType.Empty;

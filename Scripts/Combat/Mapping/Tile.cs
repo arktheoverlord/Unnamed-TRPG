@@ -1,9 +1,10 @@
 using Godot;
 using Godot.Collections;
 
-namespace Scripts.Combat.Mapping {
-    public class Tile : Area {
-        [Export]
+namespace TRPG.Combat.Mapping {
+    public class Tile : MeshInstance {
+        public bool IsHalfBlock { get; set; }
+        /*[Export]
         public float Height { get; set; }
         [Export]
         public bool IsObstruction { get; set; } = false;
@@ -81,6 +82,6 @@ namespace Scripts.Combat.Mapping {
 
         public enum TreasureTier {
             None, Normal, Rare, Epic, Legendary
-        }
+        }*/
     }
 }
