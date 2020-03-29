@@ -70,7 +70,8 @@
     <Compile Include="Scripts\Items\Equipment.cs" />
     <Compile Include="Scripts\UI\Combat\CombatCursor.cs" />
     <Compile Include="Scripts\UI\Combat\HUD.cs" />
-    <Content Include=".vscode\launch.json" />
+    <Compile Include="Scripts\Combat\Nodes\AreaHighlight.cs" />
+    <Compile Include="Scripts\Helpers\PhysicsHelpers.cs"/>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

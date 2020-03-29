@@ -17,11 +17,12 @@ script = ExtResource( 1 )
 
 [node name="CombatStateMachine" type="Node" parent="."]
 script = ExtResource( 5 )
-[connection signal="OnCharacterAdded" from="CombatCharacterManager" to="CombatStateMachine" method="OnCharacterAdded"]
+[connection signal="CharacterAdded" from="CombatCharacterManager" to="CombatStateMachine" method="OnCharacterAdded"]
 [connection signal="MoveButtonPressed" from="HUD" to="CombatCursor" method="OnMoveButtonPressed"]
 [connection signal="MoveButtonPressed" from="HUD" to="CombatCharacterManager" method="OnMoveButtonPressed"]
 [connection signal="OnExit" from="HUD" to="CombatCursor" method="OnExitButtonPressed"]
+[connection signal="CharacterDehighlighted" from="CombatCursor" to="HUD" method="OnCharacterDehighlighted"]
+[connection signal="CharacterHighlighted" from="CombatCursor" to="HUD" method="OnCharacterHighlighted"]
 [connection signal="CreateDebugNPC" from="CombatCursor" to="CombatCharacterManager" method="CreateDebugNPC"]
-[connection signal="OnCharacterDehighlighted" from="CombatCursor" to="HUD" method="OnCharacterDehighlighted"]
-[connection signal="OnCharacterHighlighted" from="CombatCursor" to="HUD" method="OnCharacterHighlighted"]
+[connection signal="MovementLocationSelected" from="CombatCursor" to="CombatCharacterManager" method="OnMovementLocationSelected"]
 [connection signal="PCInteracted" from="CombatCursor" to="HUD" method="OnPCInteracted"]

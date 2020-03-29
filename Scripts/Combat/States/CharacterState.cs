@@ -42,7 +42,7 @@ namespace Scripts.Combat.States {
         }
 
         public float GetStatTotal(Stat stat) {
-            return BaseCharacter.StatTotals[stat]() + StatModifiers[stat];
+            return Mathf.Floor(BaseCharacter.StatTotals[stat]() + StatModifiers[stat]);
         }
 
         public void TurnStartUpdate() {

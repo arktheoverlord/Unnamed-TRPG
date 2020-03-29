@@ -13,7 +13,10 @@ namespace Scripts.Combat.Nodes {
 
         #region Signals
         [Signal]
-        public delegate void OnCharacterAdded(Character character, CombatCharacterManager ccm, Team team);
+        public delegate void CharacterAdded(Character character, CombatCharacterManager ccm, Team team);
+
+        [Signal]
+        public delegate void ValidMovementLocationSelected(CharacterBody body);
         #endregion
         public override void _Ready() {
 
@@ -43,24 +46,19 @@ namespace Scripts.Combat.Nodes {
 
         public void CreateDebugNPC() {
             var character = new Character();
-            EmitSignal(nameof(OnCharacterAdded), character, this, Team.PC);
+            EmitSignal(nameof(CharacterAdded), character, this, Team.PC);
         }
 
-        public void OnMoveButtonPressed(CharacterState state) {
-            GD.Print("Got here");
-            var children = GetChildren();
+        public void OnMoveButtonPressed(CharacterBody body) {
+            isCharacterMoving = true;
+            movingCharacter = body;
+            movingCharacter.DisplayMovementArea();
+        }
 
-            foreach (var child in children) {
-                if (((CharacterBody)child).State == state) {
-                    ((CharacterBody)child).DisplayMovementArea();
-                    isCharacterMoving = true;
-                    movingCharacter = (CharacterBody)child;
-                }
+        public void OnMovementLocationSelected(Vector3 location){
+            if(movingCharacter.IsMovementSelectionValid(location)){
+
             }
-        }
-
-        public void RemoveMovementArea() {
-            
         }
     }
 }

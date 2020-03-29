@@ -44,7 +44,7 @@ namespace Scripts.Characters {
         //MovementStats
         public float Move = 5;
         public float Speed = 0;
-        public float Jump = 0;
+        public float Jump = 1;
 
         public Dictionary<Stat, Func<float>> StatTotals;
 
