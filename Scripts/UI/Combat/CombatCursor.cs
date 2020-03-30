@@ -86,6 +86,19 @@ namespace TRPG.UI.Combat {
                 menuLocked = true;
                 Translation = characterIntereactedLocation;
             }
+
+            DebugProcess();
+        }
+
+        private void DebugProcess() {
+            if (Input.IsActionJustPressed("Debug2")) {
+                var x = ((((int)Translation.x) - 1) / 2);
+                var y = ((int)Translation.y) / 2;
+                var z = ((((int)Translation.z) - 1) / 2);
+                GetTree().GetRoot().GetNode<GridMap>("Debug").SetCellItem(x, y - 1, z, -1);
+                //GD.Print(GetParent().GetNode<GridMap>("DebugWorld").GetCellItem(0, 0, 0));
+                //GetParent().GetNode<GridMap>("Debug").SetCellItem(0, 0, 0, -1);
+            }
         }
 
         public override void _Input(InputEvent @event) {
@@ -185,30 +198,30 @@ namespace TRPG.UI.Combat {
             switch (direction) {
                 case Right:
                     var offset = GetDirectionFromPivotRotation(new Vector3(MoveDistence, 0, 0));
-                    var target = offset + Translation + new Vector3(0, 0.5F, 0);
-                    if (PhysicsHelper.IsTargetWithinMap(this, target, spaceState)) {
-                        Translation += offset + new Vector3(0, PhysicsHelper.GetYOffset(this, offset, spaceState), 0);
+                    var target = offset + Translation;
+                    if (IsTargetWithinMap(target)) {
+                        Translation += offset + new Vector3(0, GetYOffset(target), 0);
                     }
                     break;
                 case Left:
                     offset = GetDirectionFromPivotRotation(new Vector3(-MoveDistence, 0, 0));
-                    target = offset + Translation + new Vector3(0, 0.5F, 0);
-                    if (PhysicsHelper.IsTargetWithinMap(this, target, spaceState)) {
-                        Translation += offset + new Vector3(0, PhysicsHelper.GetYOffset(this, offset, spaceState), 0);
+                    target = offset + Translation;
+                    if (IsTargetWithinMap(target)) {
+                        Translation += offset + new Vector3(0, GetYOffset(target), 0);
                     }
                     break;
                 case Up:
                     offset = GetDirectionFromPivotRotation(new Vector3(0, 0, -MoveDistence));
-                    target = offset + Translation + new Vector3(0, 0.5F, 0);
-                    if (PhysicsHelper.IsTargetWithinMap(this, target, spaceState)) {
-                        Translation += offset + new Vector3(0, PhysicsHelper.GetYOffset(this, offset, spaceState), 0);
+                    target = offset + Translation;
+                    if (IsTargetWithinMap(target)) {
+                        Translation += offset + new Vector3(0, GetYOffset(target), 0);
                     }
                     break;
                 case Down:
                     offset = GetDirectionFromPivotRotation(new Vector3(0, 0, MoveDistence));
-                    target = offset + Translation + new Vector3(0, 0.5F, 0);
-                    if (PhysicsHelper.IsTargetWithinMap(this, target, spaceState)) {
-                        Translation += offset + new Vector3(0, PhysicsHelper.GetYOffset(this, offset, spaceState), 0);
+                    target = offset + Translation;
+                    if (IsTargetWithinMap(target)) {
+                        Translation += offset + new Vector3(0, GetYOffset(target), 0);
                     }
                     break;
             }
@@ -232,24 +245,41 @@ namespace TRPG.UI.Combat {
         }
 
         private bool IsTargetWithinMap(Vector3 target) {
-            //Raycast from the center of the cursor to the target
-            var cast = spaceState.IntersectRay(Translation + new Vector3(0, 0.5F, 0), target, new Array() { this }, collideWithAreas: true);
-            //Did the raycast hit a collider?
-            if (cast == null || cast.Count == 0) {
-                //The raycast didn't hit a collider, so raycast from the center of the targt to a point 100 units below the target
-                cast = spaceState.IntersectRay(target, target - new Vector3(0, 100, 0), new Array() { this }, collideWithAreas: true);
-                if (cast != null && cast.Count > 0) {
+            var x = ((((int)target.x) - 1) / 2);
+            var y = ((int)target.y) / 2;
+            var z = ((((int)target.z) - 1) / 2);
+
+            for (int i = 0; i < 51; i++) {
+                if (GameManager.currentBattlefield.GetCellItem(x, y - i, z) != -1)
                     return true;
-                }
-                else {
-                    return false;
-                }
-            }
-            else {
-                //The raycast hit a collider, so the collider must be in the map
-                return true;
             }
 
+            return false;
+        }
+
+        private int GetYOffset(Vector3 target) {
+            int x = ((((int)target.x) - 1) / 2);
+            int y = ((int)target.y) / 2;
+            int z = ((((int)target.z) - 1) / 2);
+            int offset = 0;
+            int cell = GameManager.currentBattlefield.GetCellItem(x, y, z);
+
+            while (cell != -1) {
+                offset += 1;
+                cell = GameManager.currentBattlefield.GetCellItem(x, y + offset, z);
+            }
+
+            if (offset != 0)
+                return offset * 2;
+
+            for (int i = 0; i < 51; i++) {
+                if (GameManager.currentBattlefield.GetCellItem(x, y - i, z) == -1)
+                    offset -= 2;
+                else
+                    break;
+            }
+
+            return offset + 2;
         }
 
         private void ProcessInteraction() {

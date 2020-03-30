@@ -19,8 +19,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1 )
 [node name="CombatStateMachine" type="Node" parent="."]
 script = ExtResource( 5 )
 [connection signal="CharacterAdded" from="CombatCharacterManager" to="CombatStateMachine" method="OnCharacterAdded"]
-[connection signal="MoveButtonPressed" from="HUD" to="CombatCharacterManager" method="OnMoveButtonPressed"]
 [connection signal="MoveButtonPressed" from="HUD" to="CombatCursor" method="OnMoveButtonPressed"]
+[connection signal="MoveButtonPressed" from="HUD" to="CombatCharacterManager" method="OnMoveButtonPressed"]
 [connection signal="OnExit" from="HUD" to="CombatCursor" method="OnExitButtonPressed"]
 [connection signal="CharacterDehighlighted" from="CombatCursor" to="HUD" method="OnCharacterDehighlighted"]
 [connection signal="CharacterHighlighted" from="CombatCursor" to="HUD" method="OnCharacterHighlighted"]
