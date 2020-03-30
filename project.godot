@@ -132,6 +132,10 @@ Debug2={
  ]
 }
 
+[mono]
+
+debugger_agent/wait_timeout=5000
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

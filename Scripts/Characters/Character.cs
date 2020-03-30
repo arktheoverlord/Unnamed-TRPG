@@ -207,7 +207,7 @@ namespace TRPG.Characters {
         }
 
         public float GetTotalEvadeChance() {
-            float baseChance = BodyArmor.Evade + LegArmor.Evade + AccessoryOne.Evade + AccessoryTwo.Evade;
+            float baseChance = Evade + BodyArmor.Evade + LegArmor.Evade + AccessoryOne.Evade + AccessoryTwo.Evade;
             if (IsOffHandAShield()) {
                 return OffHand.Evade + baseChance;
             }
@@ -221,13 +221,13 @@ namespace TRPG.Characters {
 
         public float GetTotalBlockChance() {
             if (IsOffHandAShield()) {
-                return OffHand.Block + AccessoryOne.Block + AccessoryTwo.Block;
+                return Block + OffHand.Block + AccessoryOne.Block + AccessoryTwo.Block;
             }
             return 0;
         }
 
         public float GetTotalFireResistence() {
-            var baseRes = HeadArmor.FireResistence + BodyArmor.FireResistence + LegArmor.FireResistence + AccessoryOne.FireResistence + AccessoryTwo.FireResistence;
+            var baseRes = FireResistence + HeadArmor.FireResistence + BodyArmor.FireResistence + LegArmor.FireResistence + AccessoryOne.FireResistence + AccessoryTwo.FireResistence;
             if (IsOffHandAShield()) {
                 return OffHand.FireResistence + baseRes;
             }
@@ -237,7 +237,7 @@ namespace TRPG.Characters {
         }
 
         public float GetTotalLightningResistence() {
-            var baseRes = HeadArmor.LightningResistence + BodyArmor.LightningResistence + LegArmor.LightningResistence + AccessoryOne.LightningResistence + AccessoryTwo.LightningResistence;
+            var baseRes = LightningResistence + HeadArmor.LightningResistence + BodyArmor.LightningResistence + LegArmor.LightningResistence + AccessoryOne.LightningResistence + AccessoryTwo.LightningResistence;
             if (IsOffHandAShield()) {
                 return OffHand.LightningResistence + baseRes;
             }
@@ -247,7 +247,7 @@ namespace TRPG.Characters {
         }
 
         public float GetTotalColdResistence() {
-            var baseRes = HeadArmor.ColdResistence + BodyArmor.ColdResistence + LegArmor.ColdResistence + AccessoryOne.ColdResistence + AccessoryTwo.ColdResistence;
+            var baseRes = ColdResistence + HeadArmor.ColdResistence + BodyArmor.ColdResistence + LegArmor.ColdResistence + AccessoryOne.ColdResistence + AccessoryTwo.ColdResistence;
             if (IsOffHandAShield()) {
                 return OffHand.ColdResistence + baseRes;
             }
@@ -257,15 +257,15 @@ namespace TRPG.Characters {
         }
 
         public float GetTotalMove() {
-            return BodyArmor.Move + LegArmor.Move + AccessoryOne.Move + AccessoryTwo.Move;
+            return Move + BodyArmor.Move + LegArmor.Move + AccessoryOne.Move + AccessoryTwo.Move;
         }
 
         public float GetTotalSpeed() {
-            return BodyArmor.Speed + LegArmor.Speed + AccessoryOne.Speed + AccessoryTwo.Speed;
+            return Speed + BodyArmor.Speed + LegArmor.Speed + AccessoryOne.Speed + AccessoryTwo.Speed;
         }
 
         public float GetTotalJump() {
-            return BodyArmor.Jump + LegArmor.Jump + AccessoryOne.Jump + AccessoryTwo.Jump;
+            return Jump + BodyArmor.Jump + LegArmor.Jump + AccessoryOne.Jump + AccessoryTwo.Jump;
         }
 
         public bool IsMainHandASword() {

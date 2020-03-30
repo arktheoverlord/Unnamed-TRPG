@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using TRPG.Combat.States;
 using System.Collections.Generic;
+using TRPG.Characters;
 
 namespace TRPG.Combat.Nodes {
     public class CharacterBody : KinematicBody {
@@ -26,37 +27,84 @@ namespace TRPG.Combat.Nodes {
         }
 
         public void MoveTo(Vector3 target) {
-            MoveAndSlide(target);
+            RemoveMovementArea();
+            Translation = target + Vector3.Up;
         }
 
         public void DisplayMovementArea() {
             GetMoveArea();
+            movementArea.Visible = true;
             foreach (var vec in movementVectors) {
-                var instance = (Area) BlueAreaHighlight.Instance();
+                var instance = (Area)BlueAreaHighlight.Instance();
                 instance.Translation = vec;
+                instance.Visible = false;
                 movementArea.AddChild(instance);
             }
-            movementArea.Visible = true;
         }
 
         private void GetMoveArea() {
-            List<Vector3> area = new List<Vector3>();
+            movementVectors = new List<Vector3>();
             for (int x = (int)State.BaseCharacter.Move; x > 0; x--) {
                 for (int z = ((int)State.BaseCharacter.Move) - x; z >= 0; z--) {
-                    area.Add(new Vector3(x * 2, CharacterOffset, z * 2));
-                    area.Add(new Vector3(-x * 2, CharacterOffset, z * 2));
+                    var vec = new Vector3(x * 2, CharacterOffset, z * 2);
+                    int offset = GetYOffset(vec + Translation);
+                    vec += new Vector3(0, offset, 0);
+                    movementVectors.Add(vec);
+
+                    vec = new Vector3(-x * 2, CharacterOffset, z * 2);
+                    offset = GetYOffset(vec + Translation);
+                    vec += new Vector3(0, offset, 0);
+                    movementVectors.Add(vec);
                     if (z > 0) {
-                        area.Add(new Vector3(x * 2, CharacterOffset, -z * 2));
-                        area.Add(new Vector3(-x * 2, CharacterOffset, -z * 2));
+                        vec = new Vector3(x * 2, CharacterOffset, -z * 2);
+                        offset = GetYOffset(vec + Translation);
+                        vec += new Vector3(0, offset, 0);
+                        movementVectors.Add(vec);
+
+                        vec = new Vector3(-x * 2, CharacterOffset, -z * 2);
+                        offset = GetYOffset(vec + Translation);
+                        vec += new Vector3(0, offset, 0);
+                        movementVectors.Add(vec);
                     }
                 }
             }
 
             for (int z = (int)State.BaseCharacter.Move; z > (int)-State.BaseCharacter.Move - 1; z--) {
-                area.Add(new Vector3(0, CharacterOffset, z * 2));
+                var vec = new Vector3(0, CharacterOffset, z * 2);
+                int offset = GetYOffset(vec + Translation);
+                vec += new Vector3(0, offset, 0);
+                movementVectors.Add(vec);
             }
 
-            movementVectors = area;
+            movementVectors.Remove(new Vector3(0, CharacterOffset, 0));
+        }
+
+        private int GetYOffset(Vector3 target) {
+            int x = ((((int)target.x) - 1) / 2);
+            int y = ((int)target.y) / 2;
+            int z = ((((int)target.z) - 1) / 2);
+            //GD.Print(x + " " + y + " " + z);
+            int offset = 0;
+            int cell = GameManager.currentBattlefield.GetCellItem(x, y, z);
+            GD.Print(cell + " " + offset);
+            GD.Print(State.GetStatTotal(Stat.Jump));
+            while (cell != -1 && offset < State.GetStatTotal(Stat.Jump)) {
+                offset += 1;
+                cell = GameManager.currentBattlefield.GetCellItem(x, y + offset, z);
+            }
+            GD.Print(cell + " " + offset);
+
+            if (offset != 0)
+                return offset * 2;
+            GD.Print(cell + " " + offset);
+
+            for (int i = 0; i < State.GetStatTotal(Stat.Jump); i++) {
+                if (GameManager.currentBattlefield.GetCellItem(x, y - i, z) == -1)
+                    offset -= 2;
+                else
+                    break;
+            }
+            return offset;
         }
 
         public void RemoveMovementArea() {
@@ -67,7 +115,11 @@ namespace TRPG.Combat.Nodes {
         }
 
         public bool IsMovementSelectionValid(Vector3 selection) {
-            return movementVectors.Contains(selection);
+            foreach (var vec in movementVectors) {
+                if (vec + Translation == selection)
+                    return true;
+            }
+            return false;
         }
     }
 }

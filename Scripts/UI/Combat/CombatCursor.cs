@@ -91,14 +91,6 @@ namespace TRPG.UI.Combat {
         }
 
         private void DebugProcess() {
-            if (Input.IsActionJustPressed("Debug2")) {
-                var x = ((((int)Translation.x) - 1) / 2);
-                var y = ((int)Translation.y) / 2;
-                var z = ((((int)Translation.z) - 1) / 2);
-                GetTree().GetRoot().GetNode<GridMap>("Debug").SetCellItem(x, y - 1, z, -1);
-                //GD.Print(GetParent().GetNode<GridMap>("DebugWorld").GetCellItem(0, 0, 0));
-                //GetParent().GetNode<GridMap>("Debug").SetCellItem(0, 0, 0, -1);
-            }
         }
 
         public override void _Input(InputEvent @event) {
@@ -308,6 +300,11 @@ namespace TRPG.UI.Combat {
             }
         }
 
+        public void OnValidMovementLocationSelected(CharacterBody body){
+            characterMovementLocked = false;
+            menuLocked = false;
+        }
+
         #region Body interactions
         private void OnBodyEntered(Node body) {
             if (body.GetType() == typeof(CharacterBody)) {
@@ -326,7 +323,7 @@ namespace TRPG.UI.Combat {
         }
         #endregion
 
-        #region GUI Interaction Stuff
+        #region HUD Interaction
         public void OnExitButtonPressed() {
             menuLocked = false;
         }

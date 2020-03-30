@@ -57,7 +57,8 @@ namespace TRPG.Combat.Nodes {
 
         public void OnMovementLocationSelected(Vector3 location){
             if(movingCharacter.IsMovementSelectionValid(location)){
-
+                EmitSignal(nameof(ValidMovementLocationSelected), movingCharacter);
+                movingCharacter.MoveTo(location);
             }
         }
     }
