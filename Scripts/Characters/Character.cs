@@ -42,7 +42,7 @@ namespace TRPG.Characters {
         private float LightningResistence = 0;
         private float ColdResistence = 0;
         //MovementStats
-        public float Move = 2;
+        public float Move = 3;
         public float Speed = 0;
         public float Jump = 1;
 

@@ -85,7 +85,7 @@ namespace TRPG.Combat.Nodes {
                 foreach (var unit in Units) {
                     if (unit.ID == currentID - 1) {
                         StatChanges changes = new StatChanges();
-                        var pos = new Vector3(1f, 1f, 23f);
+                        var pos = new Vector3(-1, 3, -1);
                         changes.Position = pos;
                         unit.TurnEndUpdate(changes);
                         ccm.AddCharacter(unit, pos);

@@ -75,6 +75,7 @@
     <Compile Include="Scripts\Combat\Nodes\AreaHighlight.cs" />
     <Compile Include="Scripts\Helpers\PhysicsHelpers.cs" />
     <Compile Include="Scripts\GameManager.cs" />
+    <Compile Include="Scripts\Combat\Mapping\Pathfinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

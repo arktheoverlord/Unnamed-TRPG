@@ -42,7 +42,11 @@ namespace TRPG.Combat.States {
         }
 
         public float GetStatTotal(Stat stat) {
-            return Mathf.Floor(BaseCharacter.StatTotals[stat]() + StatModifiers[stat]);
+            float total = Mathf.Floor(BaseCharacter.StatTotals[stat]() + StatModifiers[stat]);
+            if(stat == Stat.Move && total > 20){
+                total = 20;
+            }
+            return total;
         }
 
         public void TurnStartUpdate() {
@@ -89,8 +93,8 @@ namespace TRPG.Combat.States {
             if (magnitude > 0) {
                 CurrentHealth += magnitude;
             }
-            if (CurrentHealth > StatModifiers[Stat.Health]) {
-                CurrentHealth = StatModifiers[Stat.Health];
+            if (CurrentHealth > GetStatTotal(Stat.Health)) {
+                CurrentHealth = GetStatTotal(Stat.Health);
             }
         }
 
@@ -100,8 +104,8 @@ namespace TRPG.Combat.States {
             if (magnitude > 0) {
                 CurrentMana += magnitude;
             }
-            if (CurrentMana > StatModifiers[Stat.Mana]) {
-                CurrentMana = StatModifiers[Stat.Mana];
+            if (CurrentMana > GetStatTotal(Stat.Mana)) {
+                CurrentMana = GetStatTotal(Stat.Mana);
             }
         }
 

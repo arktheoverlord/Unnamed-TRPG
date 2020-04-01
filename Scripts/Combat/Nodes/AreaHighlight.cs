@@ -8,18 +8,20 @@ namespace TRPG.Combat.Nodes {
     public class AreaHighlight : Area {
         public override void _Ready() {
             Translation += new Vector3(0, 0.01f, 0);
-            if(!IsWithinMap())
-                QueueFree();
+            if (!IsWithinMap()) {
+                //QueueFree();
+                Visible = false;
+            }
         }
 
-        public override void _Process(float delta){
-            if(!Visible)
+        public override void _Process(float delta) {
+            if (!Visible)
                 Visible = true;
         }
 
-        private bool IsWithinMap(){
+        private bool IsWithinMap() {
             var origin = GetGlobalTransform().origin;
-            
+
             int x = ((((int)origin.x) - 1) / 2);
             int y = ((int)origin.y) / 2;
             int z = ((((int)origin.z) - 1) / 2);
@@ -29,13 +31,7 @@ namespace TRPG.Combat.Nodes {
                     return true;
             }
 
-            return false;
-        }
-
-        private void OnBodyEntered(Node body) {
-            if(body.GetType() != typeof(GridMap)){
-                //QueueFree();
-            }
+            return true;
         }
     }
 }

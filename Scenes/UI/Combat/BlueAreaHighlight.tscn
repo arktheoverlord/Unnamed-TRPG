@@ -17,4 +17,3 @@ transform = Transform( 11.5, 0, 0, 0, -5.02681e-007, 1, 0, -11.5, -4.37114e-008,
 opacity = 0.45
 double_sided = false
 texture = ExtResource( 2 )
-[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
