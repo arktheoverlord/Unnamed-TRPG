@@ -5,76 +5,127 @@ using System.Linq;
 namespace TRPG.Combat.Mapping {
     public class Pathfinder {
         private TileScore current;
+        private Vector3 target;
         private List<TileScore> open;
         private List<TileScore> closed;
 
-        private const float characterOffset = -1.0f;
-
-        public List<Vector3> FindPath(Vector3 start, Vector3 target, List<Vector3> area, float jump) {
+        public Pathfinder(Vector3 start, Vector3 target){
             open = new List<TileScore>();
             closed = new List<TileScore>();
             current = new TileScore(start);
-            int iter = 0;
+            closed.Add(current);
+            this.target = target;
+        }
 
-            while (current.Tile != target) {
-                iter++;
-                var neighbors = FindNeighbors(current.Tile, area, jump);
+        public List<Vector3> FindPath(List<Vector3> area, float maxAllowedHeight) {
+            if(current.Tile == target) {
+                return GetPath();
+            }
+            else {
+                var neighbors = FindNeighbors(current.Tile, area, maxAllowedHeight);
+                
+                if(neighbors.Count == 0)
+                    return null;
 
                 foreach (var vec in neighbors) {
                     var tScore = new TileScore(vec);
-                    tScore.HScore = Mathf.Sqrt(vec.x + (vec.z * vec.z));
+                    tScore.HScore = Mathf.Sqrt(Mathf.Abs(vec.x) + (vec.z * vec.z));
                     tScore.Parent = current;
-                    open.Add(tScore);
+
+                    if(!IsTileInClosed(vec))
+                        open.Add(tScore);
                 }
 
                 var lowest = open[open.Count - 1];
-                open.Remove(lowest);
 
-                if (start == new Vector3(-2, 3, -2)) {
-                    System.Console.WriteLine(lowest.Tile);
+                foreach(var tScore in open){
+                    if(tScore.HScore < lowest.HScore)
+                        lowest = tScore;
                 }
+                
+                open.Remove(lowest);
 
                 current = lowest;
                 closed.Add(lowest);
-                if (iter > 20) {
-                    break;
-                }
+                return null;
             }
-
-            var tiles = new List<Vector3>();
-
-            foreach (var tScore in closed) {
-                tiles.Add(tScore.Tile);
-            }
-
-            return tiles;
         }
 
-        private List<Vector3> FindNeighbors(Vector3 start, List<Vector3> area, float jump) {
-            List<Vector3> neighbors = new List<Vector3>();
-            var xPos = area.Where(v => v.x - 2 == start.x && v.z == start.z).FirstOrDefault();
-            var xNeg = area.Where(v => v.x + 2 == start.x && v.z == start.z).FirstOrDefault();
-            var zPos = area.Where(v => v.x == start.x && v.z - 2 == start.z).FirstOrDefault();
-            var zNeg = area.Where(v => v.x == start.x && v.z + 2 == start.z).FirstOrDefault();
+        private List<Vector3> GetPath(){
+            var head = closed.Where(t => t.Tile == target).First();
+            List<Vector3> vectors = new List<Vector3>();
 
-            if ((start.y - xPos.y) / 2 <= jump)
+            while(head.Parent != null){
+                vectors.Add(head.Tile);
+                head = head.Parent;
+            }
+
+            vectors.Add(head.Tile);
+            return vectors;
+        }
+
+        private List<Vector3> FindNeighbors(Vector3 start, List<Vector3> area, float maxHeightDifference) {
+            List<Vector3> neighbors = new List<Vector3>();
+            var xPos = FindPositiveXNeighbor(start, area);
+            var xNeg = FindNegativeXNeighbor(start, area);
+            var zPos = FindPositiveZNeighbor(start, area);
+            var zNeg = FindNegativeZNeighbor(start, area);
+            var filter = new Vector3(0.1f, 0.1f, 0.1f);
+
+            if ((start.y - xPos.y) / 2 <= maxHeightDifference && xPos != filter)
                 neighbors.Add(xPos);
-            if ((start.y - xNeg.y) / 2 <= jump)
+            if ((start.y - xNeg.y) / 2 <= maxHeightDifference && xNeg != filter)
                 neighbors.Add(xNeg);
-            if ((start.y - zPos.y) / 2 <= jump)
+            if ((start.y - zPos.y) / 2 <= maxHeightDifference && zPos != filter)
                 neighbors.Add(zPos);
-            if ((start.y - zNeg.y) / 2 <= jump)
+            if ((start.y - zNeg.y) / 2 <= maxHeightDifference && zNeg != filter)
                 neighbors.Add(zNeg);
 
-            /*if (start == new Vector3(0, 3, -2) || start == new Vector3(-2, 3, -2)) {
-                System.Console.WriteLine(start);
-                foreach (var vec in neighbors) {
-                    System.Console.WriteLine(vec);
-                }
-                System.Console.WriteLine();
-            }*/
-
             return neighbors;
+        }
+
+        private Vector3 FindPositiveXNeighbor(Vector3 start, List<Vector3> area){
+            foreach(var v in area){
+                if(v.x == start.x + 2 && v.z == start.z){
+                    return v;
+                }
+            }
+            return new Vector3(0.1f, 0.1f, 0.1f);
+        }
+
+        private Vector3 FindNegativeXNeighbor(Vector3 start, List<Vector3> area){
+            foreach(var v in area){
+                if(v.x == start.x - 2 && v.z == start.z){
+                    return v;
+                }
+            }
+            return new Vector3(0.1f, 0.1f, 0.1f);
+        }
+
+        private Vector3 FindPositiveZNeighbor(Vector3 start, List<Vector3> area){
+            foreach(var v in area){
+                if(v.x == start.x && v.z == start.z + 2){
+                    return v;
+                }
+            }
+            return new Vector3(0.1f, 0.1f, 0.1f);
+        }
+
+        private Vector3 FindNegativeZNeighbor(Vector3 start, List<Vector3> area){
+            foreach(var v in area){
+                if(v.x == start.x && v.z == start.z - 2){
+                    return v;
+                }
+            }
+            return new Vector3(0.1f, 0.1f, 0.1f);
+        }
+
+        private bool IsTileInClosed(Vector3 tile){
+            foreach(var tScore in closed){
+                if(tScore.Tile == tile)
+                    return true;
+            }
+            return false;
         }
 
         private class TileScore {

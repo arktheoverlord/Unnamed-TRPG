@@ -24,7 +24,7 @@ namespace TRPG.Combat.Nodes {
 
         public override void _Process(float delta) {
             if (Input.IsActionJustPressed("Debug")) {
-                //CreateDebugNPC();
+                CreateDebugNPC();
             }
 
             if(Input.IsActionJustPressed("Back") && isCharacterMoving){

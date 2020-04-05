@@ -5,7 +5,6 @@ using TRPG.Combat;
 using TRPG.Combat.States;
 using TRPG.Combat.Mapping;
 using TRPG.Combat.Nodes;
-using TRPG.Helper;
 
 namespace TRPG.UI.Combat {
     public class CombatCursor : Area {
