@@ -22,5 +22,4 @@ current = true
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1.55, 0, 0, 0, -6.77527e-008, -1, 0, 1.55, -4.37114e-008, 0, 0.01, 0 )
 texture = ExtResource( 2 )
-[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
 [connection signal="body_exited" from="." to="." method="OnBodyExited"]

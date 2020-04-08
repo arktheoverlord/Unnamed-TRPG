@@ -19,11 +19,11 @@ namespace TRPG.UI.Combat {
         private string buttonPressed = "";
         private float timeSincePressed = 0f;
         private float timeSinceLastMove = 0f;
-        private CharacterBody overlapingCharacter = null;
+        private bool isCharacterHighlighted = false;
+        private CharacterBody overlapingBody = null;
         private bool menuLocked = false;
         private bool characterMovementLocked = false;
         private Vector3 characterIntereactedLocation;
-        //private CharacterBody interactedCharacter;
 
         private Spatial cameraPivot;
         private Camera camera;
@@ -45,22 +45,22 @@ namespace TRPG.UI.Combat {
 
         #region
         [Signal]
-        public delegate void PCInteracted(CharacterBody body);
+        private delegate void PCInteracted(CharacterBody body);
 
         [Signal]
-        public delegate void NPCInteracted(CharacterBody body);
+        private delegate void NPCInteracted(CharacterBody body);
 
         [Signal]
-        public delegate void CreateDebugNPC();
+        private delegate void CreateDebugNPC();
 
         [Signal]
-        public delegate void CharacterHighlighted(CharacterBody body);
+        private delegate void CharacterDehighlighted();
 
         [Signal]
-        public delegate void CharacterDehighlighted();
+        private delegate void CharacterHighlighted(CharacterBody body);
 
         [Signal]
-        public delegate void MovementLocationSelected(Vector3 location);
+        private delegate void MovementLocationSelected(Vector3 location);
         #endregion
 
         public override void _Ready() {
@@ -85,11 +85,23 @@ namespace TRPG.UI.Combat {
                 menuLocked = true;
                 Translation = characterIntereactedLocation;
             }
-
-            DebugProcess();
         }
 
-        private void DebugProcess() {
+        public override void _PhysicsProcess(float delta) {
+            var bodies = GetOverlappingBodies();
+            if (bodies.Count > 0 && bodies[0].GetType() == typeof(CharacterBody) && overlapingBody == null) {
+                isCharacterHighlighted = true;
+                overlapingBody = (CharacterBody)bodies[0];
+                EmitSignal(nameof(CharacterHighlighted), overlapingBody);
+            }
+            else if (isCharacterHighlighted && overlapingBody == null) {
+                isCharacterHighlighted = false;
+                EmitSignal(nameof(CharacterDehighlighted));
+            }
+        }
+
+        public void SetStartPosition(Vector3 pos) {
+
         }
 
         public override void _Input(InputEvent @event) {
@@ -260,8 +272,9 @@ namespace TRPG.UI.Combat {
                 cell = GameManager.currentBattlefield.GetCellItem(x, y + offset, z);
             }
 
-            if (offset != 0)
+            if (offset != 0) {
                 return offset * 2;
+            }
 
             for (int i = 0; i < 51; i++) {
                 if (GameManager.currentBattlefield.GetCellItem(x, y - i, z) == -1)
@@ -275,15 +288,15 @@ namespace TRPG.UI.Combat {
 
         private void ProcessInteraction() {
             if (Input.IsActionJustPressed(Interact)) {
-                if (overlapingCharacter != null && !characterMovementLocked) {
-                    if (overlapingCharacter.GetType() == typeof(CharacterBody)) {
-                        if (((CharacterBody)overlapingCharacter).State.CharacterTeam == Team.PC) {
+                if (overlapingBody != null && !characterMovementLocked) {
+                    if (overlapingBody.GetType() == typeof(CharacterBody)) {
+                        if (((CharacterBody)overlapingBody).State.CharacterTeam == Team.PC) {
                             if (Input.GetMouseMode() == Input.MouseMode.Captured) {
                                 Input.SetMouseMode(Input.MouseMode.Visible);
                             }
                             menuLocked = true;
                             characterIntereactedLocation = Translation;
-                            EmitSignal(nameof(PCInteracted), overlapingCharacter);
+                            EmitSignal(nameof(PCInteracted), overlapingBody);
                         }
                         else {
 
@@ -299,25 +312,15 @@ namespace TRPG.UI.Combat {
             }
         }
 
-        public void OnValidMovementLocationSelected(CharacterBody body){
+        public void OnValidMovementLocationSelected(CharacterBody body) {
             characterMovementLocked = false;
             menuLocked = false;
         }
 
         #region Body interactions
-        private void OnBodyEntered(Node body) {
-            if (body.GetType() == typeof(CharacterBody)) {
-                overlapingCharacter = (CharacterBody)body;
-                if (body != null) {
-                    EmitSignal(nameof(CharacterHighlighted), overlapingCharacter);
-                }
-            }
-        }
-
         private void OnBodyExited(Node body) {
-            if (overlapingCharacter != null && overlapingCharacter.GetType() == typeof(CharacterBody)) {
-                EmitSignal(nameof(CharacterDehighlighted));
-                overlapingCharacter = null;
+            if (overlapingBody != null && overlapingBody.GetType() == typeof(CharacterBody)) {
+                overlapingBody = null;
             }
         }
         #endregion

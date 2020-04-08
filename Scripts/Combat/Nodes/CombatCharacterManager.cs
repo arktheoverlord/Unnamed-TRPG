@@ -13,10 +13,10 @@ namespace TRPG.Combat.Nodes {
 
         #region Signals
         [Signal]
-        public delegate void CharacterAdded(Character character, CombatCharacterManager ccm, Team team);
+        private delegate void CharacterAdded(Character character, CombatCharacterManager ccm, Team team);
 
         [Signal]
-        public delegate void ValidMovementLocationSelected(CharacterBody body);
+        private delegate void ValidMovementLocationSelected(CharacterBody body);
         #endregion
         public override void _Ready() {
 
@@ -27,7 +27,7 @@ namespace TRPG.Combat.Nodes {
                 CreateDebugNPC();
             }
 
-            if(Input.IsActionJustPressed("Back") && isCharacterMoving){
+            if (Input.IsActionJustPressed("Back") && isCharacterMoving) {
                 isCharacterMoving = false;
                 movingCharacter.RemoveMovementArea();
             }
@@ -55,8 +55,8 @@ namespace TRPG.Combat.Nodes {
             movingCharacter.DisplayMovementArea();
         }
 
-        public void OnMovementLocationSelected(Vector3 location){
-            if(movingCharacter.IsMovementSelectionValid(location)){
+        public void OnMovementLocationSelected(Vector3 location) {
+            if (movingCharacter.IsMovementSelectionValid(location)) {
                 EmitSignal(nameof(ValidMovementLocationSelected), movingCharacter);
                 movingCharacter.MoveTo(location);
             }

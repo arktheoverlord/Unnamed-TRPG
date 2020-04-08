@@ -38,7 +38,7 @@ namespace TRPG.Combat.Nodes {
             movementVectors.Remove(new Vector3(0, characterOffset, 0));
             movementArea.Visible = true;
             foreach (var vec in movementVectors) {
-                var instance = (Area)BlueAreaHighlight.Instance();
+                var instance = (Sprite3D)BlueAreaHighlight.Instance();
                 instance.Translation = vec;
                 movementArea.AddChild(instance);
             }
@@ -52,14 +52,16 @@ namespace TRPG.Combat.Nodes {
                     var vec = new Vector3(x * 2, characterOffset, z * 2);
                     var offsect = new Vector3(0, GetYOffset(vec + Translation), 0);
 
-                    if (!movementVectors.Contains(vec + offsect))
+                    if (!movementVectors.Contains(vec + offsect)) {
                         movementVectors.Add(vec + offsect);
+                    }
 
                     vec *= new Vector3(-1, 1, -1);
                     offsect = new Vector3(0, GetYOffset(vec + Translation), 0);
 
-                    if (!movementVectors.Contains(vec + offsect))
+                    if (!movementVectors.Contains(vec + offsect)) {
                         movementVectors.Add(vec + offsect);
+                    }
                 }
             }
         }
@@ -77,8 +79,9 @@ namespace TRPG.Combat.Nodes {
                 cell = GameManager.currentBattlefield.GetCellItem(x, y + offset, z);
             }
 
-            if (offset != 0)
+            if (offset != 0) {
                 return offset * 2;
+            }
 
             cell = GameManager.currentBattlefield.GetCellItem(x, y - 1, z);
 
@@ -86,8 +89,9 @@ namespace TRPG.Combat.Nodes {
                 offset += 1;
                 cell = GameManager.currentBattlefield.GetCellItem(x, y - offset - 1, z);
 
-                if (offset > 50)
+                if (offset > 50) {
                     break;
+                }
             }
 
             return offset * -2;
@@ -96,8 +100,9 @@ namespace TRPG.Combat.Nodes {
         private void ValidateMovementVectors() {
             var invalid = new List<Vector3>();
             foreach (var vec in movementVectors) {
-                if (!IsTargetWithinMap(vec + Translation))
+                if (!IsTargetWithinMap(vec + Translation)) {
                     invalid.Add(vec);
+                }
             }
 
             for (int i = 0; i < movementVectors.Count; i++) {
@@ -113,14 +118,20 @@ namespace TRPG.Combat.Nodes {
                         path = pathfinder.FindPath(movementVectors, State.GetStatTotal(Stat.Jump));
 
                         ii++;
-                        if (ii > 10)
+                        if (ii > 10) {
                             break;
+                        }
+
                     } while (path == null);
 
                     if (path == null) {
                         invalid.Add(vec);
                     }
                     else if (path.Count - 1 > State.GetStatTotal(Stat.Move)) {
+                        invalid.Add(vec);
+                    }
+
+                    if(!GetParent().GetParent().GetNode<CombatStateMachine>("CombatStateMachine").IsPositionOpen(vec + Translation)){
                         invalid.Add(vec);
                     }
                 }
@@ -139,8 +150,9 @@ namespace TRPG.Combat.Nodes {
             var z = ((((int)target.z) - 1) / 2);
 
             for (int i = 0; i < 51; i++) {
-                if (GameManager.currentBattlefield.GetCellItem(x, y - i, z) != -1)
+                if (GameManager.currentBattlefield.GetCellItem(x, y - i, z) != -1) {
                     return true;
+                }
             }
 
             return false;
@@ -155,8 +167,9 @@ namespace TRPG.Combat.Nodes {
 
         public bool IsMovementSelectionValid(Vector3 selection) {
             foreach (var vec in movementVectors) {
-                if (vec + Translation == selection)
+                if (vec + Translation == selection) {
                     return true;
+                }
             }
             return false;
         }

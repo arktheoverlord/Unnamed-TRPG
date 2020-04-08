@@ -15,7 +15,7 @@ namespace TRPG.Characters {
             public List<JobAbility> UnlockedAbilities;
         }
 
-        public string CharacterName { get; private set; } = "TestTestTest";
+        public string CharacterName { get; set; } = "Default";
         public int CharacterLevel { get; private set; } = 0;
         public Job CurrentJob { get; private set; } = new Job();
         public int CurrentJobLevel { get; private set; } = 0;

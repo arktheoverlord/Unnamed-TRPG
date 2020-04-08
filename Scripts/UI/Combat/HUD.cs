@@ -24,10 +24,10 @@ namespace TRPG.UI.Combat {
 
         #region Signals
         [Signal]
-        public delegate void OnExit();
+        private delegate void OnExit();
 
         [Signal]
-        public delegate void MoveButtonPressed(CharacterBody body);
+        private delegate void MoveButtonPressed(CharacterBody body);
         #endregion
 
         public override void _Ready() {

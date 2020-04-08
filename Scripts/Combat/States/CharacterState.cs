@@ -33,17 +33,17 @@ namespace TRPG.Combat.States {
             }
         }
 
-        public void SetStatModifier(Stat stat, float amount){
+        public void SetStatModifier(Stat stat, float amount) {
             StatModifiers[stat] = amount;
         }
 
-        public void AddStatModifier(Stat stat, float amount){
+        public void AddStatModifier(Stat stat, float amount) {
             StatModifiers[stat] += amount;
         }
 
         public float GetStatTotal(Stat stat) {
             float total = Mathf.Floor(BaseCharacter.StatTotals[stat]() + StatModifiers[stat]);
-            if(stat == Stat.Move && total > 20){
+            if (stat == Stat.Move && total > 20) {
                 total = 20;
             }
             return total;

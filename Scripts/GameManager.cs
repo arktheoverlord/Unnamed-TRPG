@@ -11,13 +11,14 @@ namespace TRPG {
         public PackedScene CombatManager;
 
         public static GridMap currentBattlefield { get; private set; }
+        public static Node CMI { get; private set; }
 
         public override void _Ready() {
             CallDeferred(nameof(StartCombatDeffered), CombatScenePaths.Debug);
         }
 
         public override void _Process(float delta) {
-            if(Input.IsActionJustPressed("Debug")){
+            if (Input.IsActionJustPressed("Debug")) {
             }
         }
 
@@ -27,9 +28,9 @@ namespace TRPG {
             var cursorStart = currentBattlefield.GetNode<Position3D>("CursorStartPosition").Translation;
             GetTree().GetRoot().AddChild(currentBattlefield);
 
-            var combatManagerInstance = CombatManager.Instance();
-            combatManagerInstance.GetNode<Area>("CombatCursor").Translation = cursorStart;
-            GetTree().GetRoot().AddChild(combatManagerInstance);
+            CMI = CombatManager.Instance();
+            CMI.GetNode<Area>("CombatCursor").Translation = cursorStart;
+            GetTree().GetRoot().AddChild(CMI);
         }
 
         public void EndCombat() {

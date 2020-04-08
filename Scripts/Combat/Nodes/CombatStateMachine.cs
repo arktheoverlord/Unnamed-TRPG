@@ -10,6 +10,7 @@ using TRPG.Items;
 namespace TRPG.Combat.Nodes {
     public class CombatStateMachine : Node {
         public List<CharacterState> Units { get; private set; }
+        public Dictionary<Vector3, object> EntityPositions { get; private set; }
 
         private Dictionary<CharacterState, StatChanges> uncommitedChanges;
 
@@ -19,7 +20,7 @@ namespace TRPG.Combat.Nodes {
 
         #region Signals
         [Signal]
-        public delegate void ValidMovementLocationSelected();
+        private delegate void ValidMovementLocationSelected();
         #endregion
         public override void _Ready() {
             Units = new List<CharacterState>();
@@ -56,6 +57,15 @@ namespace TRPG.Combat.Nodes {
 
         }
 
+        public bool IsPositionOpen(Vector3 position){
+            foreach(var unit in Units){
+                if(unit.Position == position){
+                    return false;
+                }
+            }
+            return true;
+        }
+
         private void OnMovementLocationSelected(int id, Vector3 location) {
             if (LastMovementArea.Contains(location)) {
                 EmitSignal(nameof(ValidMovementLocationSelected));
@@ -81,11 +91,12 @@ namespace TRPG.Combat.Nodes {
                     break;
             }
 
-            if (character.CharacterName == "TestTestTest") {
+            if (character.CharacterName == "Default") {
                 foreach (var unit in Units) {
                     if (unit.ID == currentID - 1) {
+                        unit.BaseCharacter.CharacterName = unit.BaseCharacter.CharacterName + (currentID - 1).ToString();
                         StatChanges changes = new StatChanges();
-                        var pos = new Vector3(-1, 3, -1);
+                        var pos = GameManager.CMI.GetNode<Area>("CombatCursor").Translation + Vector3.Up;
                         changes.Position = pos;
                         unit.TurnEndUpdate(changes);
                         ccm.AddCharacter(unit, pos);
